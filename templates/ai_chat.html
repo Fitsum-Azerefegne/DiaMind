@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container my-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="chat-container">
+                <div class="chat-header">
+                    <h3><i class="fas fa-robot"></i> AI Companion</h3>
+                    <p class="mb-0">Your personalized diabetes mental health assistant</p>
+                </div>
+                
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message ai">
+                        <div class="message-avatar">AI</div>
+                        <div class="message-content">
+                            <strong>DiaMind:</strong> Hello! I'm your AI companion for diabetes mental health. 
+                            I'm here to listen, support you, and help you navigate the emotional challenges of diabetes management. 
+                            How are you feeling today?
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="typing-indicator" id="typingIndicator">
+                    <div class="typing-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    DiaMind is thinking...
+                </div>
+                
+                <div class="chat-input-container">
+                    <div class="input-group">
+                        <input type="text" id="chatInput" class="form-control" 
+                               placeholder="Share how you're feeling about diabetes today..." 
+                               onkeypress="if(event.keyCode==13) sendMessage()">
+                        <button onclick="sendMessage()" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> Send
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
