@@ -1,0 +1,285 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Modern Blue Ribbon Color Palette */
+    --background: 210 40% 98%;  /* Pure white with subtle blue tint */
+    --foreground: 210 15% 20%;  /* Soft dark blue-gray for text */
+
+    --card: 0 0% 100%;
+    --card-foreground: 210 7% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 7% 11%;
+
+    --primary: 199 61% 68%;  /* Clear Arctic sky blue #74BEE3 */
+    --primary-foreground: 210 7% 11%;
+
+    --secondary: 207 30% 41%;  /* Deep polar gray-blue #4B6B88 */
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 200 33% 95%;  /* Soft misty background */
+    --muted-foreground: 207 20% 45%;
+
+    --accent: 197 57% 86%;  /* Soft ice shimmer #C7E8F3 */
+    --accent-foreground: 210 7% 11%;
+    
+    --diabetes-blue: 199 100% 38%;  /* #007DC3 - Diabetes awareness ribbon blue */
+    --diabetes-blue-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 200 20% 88%;
+    --input: 200 20% 88%;
+    --ring: 199 61% 68%;
+
+    --radius: 1rem;
+
+    /* Arctic Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(199 61% 68% / 0.12), hsl(197 57% 86% / 0.18));
+    --gradient-card: linear-gradient(145deg, hsl(var(--card)), hsl(200 33% 95% / 0.5));
+    --gradient-aurora: linear-gradient(135deg, hsl(199 61% 68% / 0.25), hsl(207 30% 41% / 0.15), hsl(197 57% 86% / 0.3));
+    
+    /* Arctic Shadows */
+    --shadow-sm: 0 1px 3px 0 hsl(210 7% 11% / 0.06);
+    --shadow-md: 0 4px 8px -2px hsl(210 7% 11% / 0.1);
+    --shadow-lg: 0 12px 30px -8px hsl(210 7% 11% / 0.15);
+    --shadow-glow: 0 0 30px hsl(199 61% 68% / 0.3);
+    --shadow-shimmer: 0 0 15px hsl(199 61% 68% / 0.45);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Arctic Night Theme */
+    --background: 210 35% 12%;  /* Deep ocean night */
+    --foreground: 200 20% 95%;
+
+    --card: 210 30% 15%;
+    --card-foreground: 200 20% 95%;
+
+    --popover: 210 30% 15%;
+    --popover-foreground: 200 20% 95%;
+
+    --primary: 199 61% 68%;  /* Clear Arctic sky blue */
+    --primary-foreground: 210 35% 12%;
+
+    --secondary: 207 30% 41%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 210 30% 20%;
+    --muted-foreground: 200 15% 70%;
+
+    --accent: 197 57% 86%;
+    --accent-foreground: 210 35% 12%;
+
+    --destructive: 0 62.8% 50.6%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 25% 25%;
+    --input: 210 25% 25%;
+    --ring: 199 61% 68%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer utilities {
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.8s ease-out;
+  }
+  
+  .animate-shimmer {
+    animation: shimmer 3s ease-in-out infinite;
+  }
+  
+  .animate-wave {
+    animation: wave 20s ease-in-out infinite;
+  }
+  
+  .animate-aurora {
+    animation: aurora 15s ease-in-out infinite;
+  }
+  
+  .animate-tern-fly {
+    animation: ternFly 25s ease-in-out infinite;
+  }
+  
+  .animate-tern-glide {
+    animation: ternGlide 30s linear infinite;
+  }
+  
+  .animate-ribbon-flow {
+    animation: ribbonFlow 20s ease-in-out infinite;
+  }
+  
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes shimmer {
+    0%, 100% {
+      filter: brightness(1) drop-shadow(0 0 8px hsl(200 60% 75% / 0.3));
+    }
+    50% {
+      filter: brightness(1.15) drop-shadow(0 0 12px hsl(200 60% 75% / 0.5));
+    }
+  }
+  
+  @keyframes wave {
+    0%, 100% {
+      transform: translateX(-50%) translateY(0);
+    }
+    50% {
+      transform: translateX(-50%) translateY(-20px);
+    }
+  }
+  
+  @keyframes aurora {
+    0%, 100% {
+      opacity: 0.3;
+      transform: translateX(-10%);
+    }
+    50% {
+      opacity: 0.6;
+      transform: translateX(10%);
+    }
+  }
+  
+  @keyframes ternFly {
+    0%, 100% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    25% {
+      transform: translate(100px, -50px) rotate(5deg);
+    }
+    50% {
+      transform: translate(200px, 0) rotate(0deg);
+    }
+    75% {
+      transform: translate(100px, 50px) rotate(-5deg);
+    }
+  }
+  
+  @keyframes ternGlide {
+    0% {
+      transform: translate(-100px, 0) rotate(-5deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.5;
+    }
+    50% {
+      transform: translate(50vw, -30px) rotate(2deg);
+      opacity: 0.6;
+    }
+    90% {
+      opacity: 0.4;
+    }
+    100% {
+      transform: translate(calc(100vw + 100px), -10px) rotate(5deg);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes ribbonFlow {
+    0%, 100% {
+      transform: translateX(-5%) translateY(-5%) rotate(-2deg) scale(1);
+    }
+    50% {
+      transform: translateX(5%) translateY(5%) rotate(2deg) scale(1.05);
+    }
+  }
+  
+  .bg-gradient-flow {
+    background: linear-gradient(135deg, 
+      rgba(59, 130, 246, 0.1) 0%,
+      rgba(147, 197, 253, 0.2) 25%,
+      rgba(59, 130, 246, 0.15) 50%,
+      rgba(147, 197, 253, 0.1) 75%,
+      rgba(59, 130, 246, 0.05) 100%);
+    background-size: 400% 400%;
+    animation: gradientFlow 15s ease infinite;
+  }
+  
+  @keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+}
