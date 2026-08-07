@@ -5,7 +5,7 @@ intentionally noisy and imperfect — the point is to combine several weak signa
 (majority vote here; swap in Snorkel's LabelModel for something more principled)
 to bootstrap labels across a large corpus, which you then spot-check by hand.
 
-Run this on data/raw_posts.csv (from collect_reddit_data.py) to produce
+Run this on data/raw_forum_posts.csv (from collect_forum_data.py) to produce
 data/weakly_labeled_posts.csv. ALWAYS hand-review a sample before trusting this
 as training data — say so explicitly in your writeup.
 """
@@ -50,8 +50,6 @@ def weak_label(text):
         labels[label] = int(any(p.search(text) for p in patterns))
 
     has_humor = any(p.search(text) for p in COMPILED["humor_marker"])
-    # If humor markers are present and only one weak distress signal fired,
-    # flag for manual review rather than auto-labeling as distress.
     n_positive = sum(labels.values())
     needs_review = has_humor and n_positive >= 1
 
@@ -61,11 +59,16 @@ def weak_label(text):
 
 
 def main():
-    in_path = os.path.join(os.path.dirname(__file__), "..", "data", "raw_posts.csv")
+    forum_path = os.path.join(os.path.dirname(__file__), "..", "data", "raw_forum_posts.csv")
+    reddit_path = os.path.join(os.path.dirname(__file__), "..", "data", "raw_posts.csv")
     out_path = os.path.join(os.path.dirname(__file__), "..", "data", "weakly_labeled_posts.csv")
 
-    if not os.path.exists(in_path):
-        print(f"Expected input at {in_path} — run collect_reddit_data.py first.")
+    if os.path.exists(forum_path):
+        in_path = forum_path
+    elif os.path.exists(reddit_path):
+        in_path = reddit_path
+    else:
+        print("No raw data found. Run collect_forum_data.py (recommended) first.")
         return
 
     rows = []

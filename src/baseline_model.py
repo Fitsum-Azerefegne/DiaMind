@@ -19,7 +19,7 @@ from sklearn.metrics import classification_report, f1_score
 LABELS = ["management_overwhelm", "guilt_shame", "fear_complications",
           "social_isolation", "hopelessness"]
 
-DATA_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "sample_labeled_data.csv")
+DATA_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "weakly_labeled_posts.csv")
 MODEL_DIR = os.path.join(os.path.dirname(__file__), "..", "models")
 
 
