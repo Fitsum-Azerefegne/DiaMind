@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DiaMind — a quiet place to check in</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
+
+  :root {
+    --ink: #2B2B26;
+    --paper: #FAF7F2;
+    --deep-teal: #1B4B43;
+    --sage: #8FA998;
+    --coral: #E8927C;
+    --line-grey: #D8D2C4;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--deep-teal);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 48px 20px;
+  }
+
+  .page {
+    width: 100%;
+    max-width: 620px;
+    animation: rise 0.6s ease-out;
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  header {
+    color: var(--paper);
+    margin-bottom: 28px;
+  }
+
+  header .eyebrow {
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 6px;
+  }
+
+  header h1 {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 600;
+    font-size: 34px;
+    margin: 0 0 8px 0;
+  }
+
+  header p {
+    font-size: 15px;
+    color: #CFE0D9;
+    line-height: 1.5;
+    margin: 0;
+    max-width: 46ch;
+  }
+
+  .card {
+    background: var(--paper);
+    border-radius: 4px;
+    padding: 32px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+  }
+
+  .card h2 {
+    font-family: 'Source Serif 4', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 18px;
+    margin: 0 0 16px 0;
+    color: var(--deep-teal);
+  }
+
+  textarea {
+    width: 100%;
+    min-height: 120px;
+    border: none;
+    border-bottom: 1px solid var(--line-grey);
+    background: transparent;
+    font-family: 'Source Serif 4', serif;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--ink);
+    resize: vertical;
+    padding: 4px 0;
+  }
+
+  textarea:focus {
+    outline: none;
+    border-bottom: 1px solid var(--deep-teal);
+  }
+
+  textarea::placeholder { color: #A7A093; font-style: italic; }
+
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+  }
+
+  button {
+    background: var(--deep-teal);
+    color: var(--paper);
+    border: none;
+    padding: 11px 22px;
+    border-radius: 3px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+
+  button:hover { background: #123932; }
+  button:focus-visible { outline: 2px solid var(--coral); outline-offset: 2px; }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .result {
+    margin-top: 26px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line-grey);
+    display: none;
+  }
+
+  .result.visible { display: block; animation: rise 0.4s ease-out; }
+
+  .result .message {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: #4A4A42;
+    margin-bottom: 18px;
+  }
+
+  .bars { display: flex; flex-direction: column; gap: 8px; }
+
+  .bar-row {
+    display: grid;
+    grid-template-columns: 160px 1fr 44px;
+    align-items: center;
+    gap: 10px;
+    font-size: 12.5px;
+  }
+
+  .bar-label { color: #6B6B5F; }
+
+  .bar-track {
+    height: 7px;
+    background: #EFEAE0;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 100%;
+    background: var(--sage);
+    border-radius: 4px;
+    transition: width 0.5s ease;
+  }
+
+  .bar-fill.hot { background: var(--coral); }
+
+  .bar-value { text-align: right; color: #8A8578; font-variant-numeric: tabular-nums; }
+
+  .trend-section {
+    margin-top: 20px;
+    color: var(--paper);
+  }
+
+  .trend-section h3 {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 15px;
+    color: #CFE0D9;
+    margin: 0 0 10px 0;
+  }
+
+  svg#trend-chart { width: 100%; height: 110px; display: block; }
+
+  .disclaimer {
+    margin-top: 28px;
+    font-size: 12px;
+    color: #A9C4BA;
+    line-height: 1.6;
+    max-width: 52ch;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="eyebrow">DiaMind — daily check-in</div>
+    <h1>How's it sitting with you today?</h1>
+    <p>Write a few lines about how managing things is going. This reflects language
+       patterns back to you over time — it never diagnoses, and it's not a substitute
+       for talking to your care team.</p>
+  </header>
+
+  <div class="card">
+    <h2>Today's entry</h2>
+    <textarea id="entry" placeholder="Whatever's on your mind about today..."></textarea>
+    <div class="actions">
+      <button id="submit-btn" onclick="analyzeEntry()">Save entry</button>
+    </div>
+
+    <div id="result" class="result">
+      <div class="message" id="context-message"></div>
+      <div class="bars" id="bars"></div>
+    </div>
+  </div>
+
+  <div class="trend-section">
+    <h3>Trend across your entries</h3>
+    <svg id="trend-chart" viewBox="0 0 600 110"></svg>
+  </div>
+
+  <div class="disclaimer">
+    DiaMind reflects language patterns associated with diabetes distress, based on
+    a model grounded in validated clinical distress instruments. It does not
+    diagnose any condition and does not give medical or dosing advice. If entries
+    trend upward over time, consider talking to your care team or a mental health
+    professional.
+  </div>
+</div>
+
+<script>
+  const API_BASE = "http://localhost:8000";
+  const LABEL_NAMES = {
+    management_overwhelm: "Management overwhelm",
+    guilt_shame: "Guilt / shame",
+    fear_complications: "Fear of complications",
+    social_isolation: "Social isolation",
+    hopelessness: "Hopelessness"
+  };
+
+  let history = [];
+
+  async function analyzeEntry() {
+    const text = document.getElementById('entry').value.trim();
+    if (!text) return;
+
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = "Reading...";
+
+    try {
+      const res = await fetch(`${API_BASE}/analyze`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text })
+      });
+      const data = await res.json();
+      renderResult(data);
+      history.push(data);
+      renderTrend();
+      document.getElementById('entry').value = "";
+    } catch (e) {
+      document.getElementById('context-message').textContent =
+        "Couldn't reach the DiaMind API — make sure the backend is running (uvicorn backend.main:app --reload).";
+      document.getElementById('result').classList.add('visible');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "Save entry";
+    }
+  }
+
+  function renderResult(data) {
+    document.getElementById('context-message').textContent = data.context_message;
+    const barsEl = document.getElementById('bars');
+    barsEl.innerHTML = "";
+    Object.entries(data.scores).forEach(([label, score]) => {
+      const row = document.createElement('div');
+      row.className = 'bar-row';
+      row.innerHTML = `
+        <div class="bar-label">${LABEL_NAMES[label] || label}</div>
+        <div class="bar-track"><div class="bar-fill ${score > 0.4 ? 'hot' : ''}" style="width:${score*100}%"></div></div>
+        <div class="bar-value">${(score*100).toFixed(0)}%</div>
+      `;
+      barsEl.appendChild(row);
+    });
+    document.getElementById('result').classList.add('visible');
+  }
+
+  function renderTrend() {
+    const svg = document.getElementById('trend-chart');
+    const w = 600, h = 110, pad = 10;
+    if (history.length < 2) {
+      svg.innerHTML = `<text x="10" y="55" fill="#CFE0D9" font-size="12" font-family="IBM Plex Sans">Add a couple more entries to see a trend line here.</text>`;
+      return;
+    }
+    const maxScores = history.map(h => Math.max(...Object.values(h.scores)));
+    const stepX = (w - pad*2) / (maxScores.length - 1);
+    const points = maxScores.map((s, i) => {
+      const x = pad + i * stepX;
+      const y = h - pad - s * (h - pad*2);
+      return [x, y];
+    });
+    const pathD = points.map((p, i) => (i === 0 ? `M${p[0]},${p[1]}` : `L${p[0]},${p[1]}`)).join(" ");
+    const dots = points.map(p => `<circle cx="${p[0]}" cy="${p[1]}" r="3.5" fill="#E8927C" />`).join("");
+    svg.innerHTML = `
+      <line x1="${pad}" y1="${h-pad}" x2="${w-pad}" y2="${h-pad}" stroke="#3F6E64" stroke-width="1" />
+      <path d="${pathD}" fill="none" stroke="#8FA998" stroke-width="2" />
+      ${dots}
+    `;
+  }
+</script>
+</body>
+</html>

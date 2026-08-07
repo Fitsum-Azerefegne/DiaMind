@@ -1,0 +1,20 @@
+# Virtual Environments
+venv/
+env/
+.venv/
+
+# Environment Variables (CRITICAL: Do not push secrets!)
+.env
+
+# Python Caches
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Large Machine Learning / Model Files
+# (Weights and datasets are usually too big for Git and should be hosted elsewhere)
+*.h5
+*.pt
+*.pth
+datasets/
