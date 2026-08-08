@@ -48,9 +48,9 @@ export default function JournalView() {
   return (
     <>
       <header className="hero">
-        <div className="eyebrow">DiaMind — your safe space</div>
-        <h1>Hey, how are you doing today? 💙</h1>
-        <p>This is just for you. Write whatever's on your mind — good days, hard days, frustrating numbers, small wins. Living with T1D is a lot, and your feelings are valid.</p>
+        <div className="eyebrow">DiaMind — your private signal journal</div>
+        <h1>Turn today into something you can actually read back</h1>
+        <p>Write the pressure, the wins, the frustration, and the moments in between. DiaMind keeps the emotional pattern visible without getting in the way.</p>
       </header>
 
       <FactCard />

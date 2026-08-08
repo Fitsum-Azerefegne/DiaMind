@@ -43,80 +43,117 @@ export default function AuthView() {
   }
 
   return (
-    <div className="page">
-      <div className="topbar">
-        <div className="brand">DiaMind<span className="dot">.</span></div>
-      </div>
-
-      <header className="hero">
-        <div className="eyebrow">DiaMind — daily check-in</div>
-        <h1>{isSignup ? "Create your account" : "Welcome back"}</h1>
-        <p>A private, reflective space for how managing type 1 diabetes actually feels day to day. Not a diagnosis tool — a mirror.</p>
-      </header>
-
-      <div className="steps">
-        <div className="step-row">
-          <div className="step-num">01</div>
-          <div><h4>Write</h4><p>A few honest lines about today — no formatting, no filter, whatever's actually true.</p></div>
-        </div>
-        <div className="step-row">
-          <div className="step-num">02</div>
-          <div><h4>Reflect</h4><p>See which language patterns showed up, described plainly, with the words that drove it.</p></div>
-        </div>
-        <div className="step-row">
-          <div className="step-num">03</div>
-          <div><h4>Track</h4><p>Watch the pattern over weeks, not just one hard day — that's where it actually means something.</p></div>
-        </div>
-      </div>
-
-      <div className="legend">
-        <div className="legend-title">What DiaMind listens for</div>
-        {LEGEND.map((item) => (
-          <div className="legend-row" key={item.label}>
-            <div className="legend-dot" />
-            <div className="legend-label">{item.label}</div>
-            <div className="legend-desc">{item.desc}</div>
+    <div className="page auth-page">
+      <div className="auth-shell">
+        <section className="auth-intro">
+          <div className="auth-brand-lockup">
+            <div className="brand-mark brand-mark-large" aria-hidden="true">
+              <span />
+            </div>
+            <div>
+              <div className="auth-brand-name">DiaMind</div>
+              <p className="auth-brand-tagline">A private place for the emotional side of T1D</p>
+            </div>
           </div>
-        ))}
-      </div>
 
-      <div className="card">
-        <h2>{isSignup ? "Sign up for DiaMind" : "Log in to your account"}</h2>
-        {error && <div className="error-msg">{error}</div>}
-        <form onSubmit={handleSubmit}>
-          <div className="field">
-            <label>Email</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="you@example.com"
-              autoComplete="email"
-            />
+          <div className="auth-kicker">Track feelings. Surface patterns. Protect privacy.</div>
+          <h1>{isSignup ? "Build a clearer picture of the hard days" : "Make the invisible load visible"}</h1>
+          <p className="auth-lead">
+            DiaMind turns your journal entries into a sharper view of overwhelm, guilt, fear, and isolation so you can see what keeps showing up instead of carrying it alone.
+          </p>
+
+          <div className="auth-stats">
+            <div className="stat-card">
+              <div className="stat-value">1</div>
+              <div className="stat-label">private journal</div>
+            </div>
+            <div className="stat-card">
+              <div className="stat-value">3</div>
+              <div className="stat-label">ways to reflect</div>
+            </div>
+            <div className="stat-card">
+              <div className="stat-value">0</div>
+              <div className="stat-label">medical advice</div>
+            </div>
           </div>
-          <div className="field">
-            <label>Password</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="At least 8 characters"
-              autoComplete={isSignup ? "new-password" : "current-password"}
-            />
+
+          <div className="auth-feature-grid">
+            <div className="auth-feature">
+              <div className="auth-feature-index">01</div>
+              <h3>Write plainly</h3>
+              <p>Capture the day in your own words, without having to sanitize the hard parts.</p>
+            </div>
+            <div className="auth-feature">
+              <div className="auth-feature-index">02</div>
+              <h3>Read the signals</h3>
+              <p>See the emotional patterns hidden inside the language you already use.</p>
+            </div>
+            <div className="auth-feature">
+              <div className="auth-feature-index">03</div>
+              <h3>Spot momentum</h3>
+              <p>Watch the trend over time so one rough night does not define the story.</p>
+            </div>
           </div>
-          <div className="actions">
-            <button className="primary" type="submit" disabled={loading}>
-              {loading ? (isSignup ? "Signing up..." : "Logging in...") : (isSignup ? "Sign up" : "Log in")}
-            </button>
+
+          <div className="auth-proof-row">
+            {LEGEND.slice(0, 3).map((item) => (
+              <div className="auth-proof-pill" key={item.label}>
+                <span />
+                {item.label}
+              </div>
+            ))}
           </div>
-        </form>
-        <div className="switch-line">
-          {isSignup ? (
-            <>Already have an account? <button onClick={() => { setIsSignup(false); setError(""); }}>Log in</button></>
-          ) : (
-            <>Don't have an account? <button onClick={() => { setIsSignup(true); setError(""); }}>Sign up</button></>
-          )}
-        </div>
+        </section>
+
+        <section className="auth-panel card">
+          <div className="auth-panel-head">
+            <div>
+              <div className="auth-panel-kicker">{isSignup ? "Create your account" : "Welcome back"}</div>
+              <h2>{isSignup ? "Start your private space" : "Sign in to continue"}</h2>
+            </div>
+            <div className="auth-panel-chip">Secure by design</div>
+          </div>
+
+          <p className="auth-panel-copy">
+            {isSignup ? "Join DiaMind and start turning your entries into clear emotional patterns." : "Pick up where you left off and keep tracking what matters."}
+          </p>
+
+          {error && <div className="error-msg">{error}</div>}
+          <form onSubmit={handleSubmit}>
+            <div className="field">
+              <label>Email</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="you@example.com"
+                autoComplete="email"
+              />
+            </div>
+            <div className="field">
+              <label>Password</label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="At least 8 characters"
+                autoComplete={isSignup ? "new-password" : "current-password"}
+              />
+            </div>
+            <div className="actions auth-actions">
+              <button className="primary" type="submit" disabled={loading}>
+                {loading ? (isSignup ? "Signing up..." : "Logging in...") : (isSignup ? "Sign up" : "Log in")}
+              </button>
+            </div>
+          </form>
+          <div className="switch-line">
+            {isSignup ? (
+              <>Already have an account? <button onClick={() => { setIsSignup(false); setError(""); }}>Log in</button></>
+            ) : (
+              <>Don't have an account? <button onClick={() => { setIsSignup(true); setError(""); }}>Sign up</button></>
+            )}
+          </div>
+        </section>
       </div>
     </div>
   );

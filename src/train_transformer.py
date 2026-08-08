@@ -1,6 +1,10 @@
 """
 Fine-tunes DistilBERT for multi-label diabetes-distress classification.
 
+This version trains on the real weakly labeled forum data plus the synthetic
+sample set, which gives the transformer more signal than the synthetic-only
+version.
+
 Needs internet access to pull pretrained weights the first time (this sandbox is
 network-restricted, so run this locally or on Colab). A free Colab T4 GPU handles
 this fine at this dataset size in a few minutes; CPU works too, just slower.
@@ -25,7 +29,10 @@ from transformers import (
 LABELS = ["management_overwhelm", "guilt_shame", "fear_complications",
           "social_isolation", "hopelessness"]
 MODEL_NAME = "distilbert-base-uncased"
-DATA_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "sample_labeled_data.csv")
+DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
+WEAK_DATA = os.path.join(DATA_DIR, "weakly_labeled_posts.csv")
+SYNTH_DATA = os.path.join(DATA_DIR, "sample_labeled_data.csv")
+MIN_POSITIVES = 20
 OUTPUT_DIR = os.path.join(os.path.dirname(__file__), "..", "models", "distilbert-diamind")
 
 
@@ -54,10 +61,48 @@ def compute_metrics(eval_pred):
     return {"macro_f1": macro_f1, "micro_f1": micro_f1}
 
 
+def load_data():
+    df_real = pd.read_csv(WEAK_DATA, encoding="utf-8")
+    df_real = df_real[df_real["needs_manual_review"] == 0].copy()
+    df_real = df_real[["text"] + LABELS].dropna()
+    df_real[LABELS] = df_real[LABELS].astype(int)
+
+    print(f"Real data: {len(df_real)} posts (after dropping manual-review flagged)")
+    print("Positive counts per label (real data):")
+    for label in LABELS:
+        print(f"  {label}: {df_real[label].sum()}")
+
+    frames = [df_real]
+    if os.path.exists(SYNTH_DATA):
+        df_synth = pd.read_csv(SYNTH_DATA, encoding="utf-8")
+        df_synth = df_synth[["text"] + LABELS].dropna()
+        df_synth[LABELS] = df_synth[LABELS].astype(int)
+
+        sparse_labels = [label for label in LABELS if df_real[label].sum() < MIN_POSITIVES]
+        if sparse_labels:
+            print(
+                f"\nLabels below {MIN_POSITIVES} real positives, supplementing with synthetic: {sparse_labels}"
+            )
+            supplement_mask = df_synth[sparse_labels].any(axis=1)
+            df_supplement = df_synth[supplement_mask].copy()
+            frames.append(df_supplement)
+            print(f"Added {len(df_supplement)} synthetic rows as supplement")
+        else:
+            print("\nAll labels have sufficient real data — no synthetic supplement needed.")
+    else:
+        print("\nNo synthetic data found — run data/generate_synthetic_data.py to create it.")
+
+    df = pd.concat(frames, ignore_index=True)
+    print(f"\nFinal training set: {len(df)} rows")
+    print("Final positive counts per label:")
+    for label in LABELS:
+        print(f"  {label}: {df[label].sum()}")
+
+    return df["text"].values, df[LABELS].values.astype(float)
+
+
 def main():
-    df = pd.read_csv(DATA_PATH)
-    X = df["text"].values
-    y = df[LABELS].values.astype(float)
+    X, y = load_data()
 
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, random_state=42
@@ -82,6 +127,9 @@ def main():
         save_strategy="epoch",
         load_best_model_at_end=True,
         metric_for_best_model="macro_f1",
+        learning_rate=2e-5,
+        weight_decay=0.01,
+        warmup_ratio=0.1,
         logging_dir=os.path.join(OUTPUT_DIR, "logs"),
         logging_steps=10,
     )

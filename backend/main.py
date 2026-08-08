@@ -9,6 +9,8 @@ import os
 import io
 import csv
 import joblib
+import numpy as np
+import torch
 from datetime import datetime
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
@@ -21,6 +23,7 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, Tabl
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib import colors
 from reportlab.lib.units import inch
+from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
 from backend.database import Base, engine, get_db
 from backend import models
@@ -41,6 +44,7 @@ LABEL_DESCRIPTIONS = {
 }
 
 MODEL_DIR = os.path.join(os.path.dirname(__file__), "..", "models")
+TRANSFORMER_MODEL_DIR = os.path.join(MODEL_DIR, "distilbert-diamind")
 
 # Create tables on startup if they don't already exist
 Base.metadata.create_all(bind=engine)
@@ -58,14 +62,54 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login", auto_error=False)
 
 _vectorizer = None
 _clf = None
+_tokenizer = None
+_transformer_model = None
 
 
 def get_model():
-    global _vectorizer, _clf
-    if _vectorizer is None:
+    global _vectorizer, _clf, _tokenizer, _transformer_model
+
+    if os.path.isdir(TRANSFORMER_MODEL_DIR):
+        if _tokenizer is None or _transformer_model is None:
+            try:
+                _tokenizer = AutoTokenizer.from_pretrained(TRANSFORMER_MODEL_DIR)
+                _transformer_model = AutoModelForSequenceClassification.from_pretrained(TRANSFORMER_MODEL_DIR)
+                _transformer_model.eval()
+            except Exception:
+                _tokenizer = None
+                _transformer_model = None
+        if _tokenizer is not None and _transformer_model is not None:
+            return "transformer", _tokenizer, _transformer_model
+
+    if _vectorizer is None or _clf is None:
         _vectorizer = joblib.load(os.path.join(MODEL_DIR, "baseline_vectorizer.joblib"))
         _clf = joblib.load(os.path.join(MODEL_DIR, "baseline_classifier.joblib"))
-    return _vectorizer, _clf
+    return "baseline", _vectorizer, _clf
+
+
+def score_text(text: str):
+    model_kind, first, second = get_model()
+
+    if model_kind == "transformer":
+        tokenizer = first
+        model = second
+        inputs = tokenizer(
+            [text],
+            truncation=True,
+            padding=True,
+            max_length=128,
+            return_tensors="pt",
+        )
+        with torch.no_grad():
+            logits = model(**inputs).logits[0].detach().cpu().numpy()
+        probs = 1 / (1 + np.exp(-logits))
+    else:
+        vectorizer = first
+        clf = second
+        vec = vectorizer.transform([text])
+        probs = clf.predict_proba(vec)[0]
+
+    return {label: round(float(p), 3) for label, p in zip(LABELS, probs)}
 
 
 def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
@@ -171,21 +215,38 @@ def analyze(
     current_user: models.User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
-    vectorizer, clf = get_model()
-    vec = vectorizer.transform([entry.text])
-    probs = clf.predict_proba(vec)[0]
-    scores = {label: round(float(p), 3) for label, p in zip(LABELS, probs)}
+    scores = score_text(entry.text)
 
     top_label = max(scores, key=scores.get)
     top_score = scores[top_label]
 
-    POSITIVE_WORDS = ["happy", "great", "good", "well", "proud", "amazing", "wonderful",
-                       "excited", "grateful", "thankful", "better", "strong", "confident",
-                       "joy", "love", "calm", "peaceful", "hopeful", "fine", "okay", "ok"]
+    import re
     text_lower = entry.text.lower()
-    sounds_positive = any(w in text_lower for w in POSITIVE_WORDS)
 
-    if top_score < 0.4:
+    POSITIVE_PATTERNS = [
+        r"\b(feel|feeling|felt)\s+(so\s+)?(good|great|happy|amazing|wonderful|fantastic|proud|grateful|thankful|blessed|positive|hopeful|strong|confident|calm|peaceful|okay|fine|better|well)\b",
+        r"\b(i am|i'm|im)\s+(so\s+)?(good|great|happy|amazing|wonderful|fantastic|proud|grateful|thankful|blessed|positive|hopeful|strong|confident|calm|peaceful|okay|fine|better|well)\b",
+        r"\b(had a|having a|such a)\s+(good|great|amazing|wonderful|fantastic|brilliant|lovely|nice|positive)\s+(day|week|time|moment)\b",
+        r"\b(numbers?|bg|blood sugar|glucose)\s+(was|were|is|are|look|looks)\s+(good|great|amazing|perfect|spot on|on point|stable|flat|nice)\b",
+        r"\b(so\s+)?(happy|excited|grateful|thankful|proud|relieved|pleased|thrilled)\b",
+        r"\bthings?\s+(are|is|going)\s+(good|great|well|better|amazing|fine|okay)\b",
+        r"\b(doing|going)\s+(really\s+)?(well|good|great|amazing|fine|okay)\b",
+        r"\b(love|loved|loving)\s+(today|this|it|life|everything)\b",
+        r"\bsmall\s+win\b",
+        r"\b(nailed it|crushed it|killed it|on track|in range|in control)\b",
+    ]
+    sounds_positive = any(re.search(p, text_lower) for p in POSITIVE_PATTERNS)
+
+    # If the entry sounds positive, override the model — don't show distress signals
+    # for clearly happy entries even if the model picks up noise words
+    DISTRESS_THRESHOLD = 0.55  # raised from 0.4 to reduce false positives
+    if sounds_positive and top_score < 0.7:
+        context_message = (
+            "That's genuinely great to hear 💛 Days like this matter — hold onto that feeling. "
+            "Living with T1D takes real strength, and it sounds like you're doing well today."
+        )
+        stored_top_label = None
+    elif top_score < DISTRESS_THRESHOLD:
         if sounds_positive:
             context_message = (
                 "That's genuinely great to hear 💛 Days like this matter — hold onto that feeling. "

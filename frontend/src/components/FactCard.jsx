@@ -12,8 +12,11 @@ export default function FactCard() {
 
   return (
     <div className="fact-card">
-      <div className="fact-eyebrow">Fact of the day — {fact.category}</div>
-      <p>{fact.text}</p>
+      <div className="fact-icon">💡</div>
+      <div>
+        <div className="fact-eyebrow">Did you know — {fact.category}</div>
+        <p>{fact.text}</p>
+      </div>
     </div>
   );
 }
