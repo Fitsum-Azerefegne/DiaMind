@@ -36,15 +36,31 @@ npm run dev
 
 ## Deployment notes
 
+The simplest production path is a single Docker container that serves both the API and the built frontend.
+
+### Docker deploy
+
+```bash
+docker build -t diamind .
+docker run -p 8000:8000 \
+	-e DATABASE_URL=postgresql+psycopg://user:password@host:5432/diamind \
+	-e GOOGLE_CLIENT_ID=your-google-client-id \
+	-e FRONTEND_ORIGINS=http://localhost:8000 \
+	diamind
+```
+
 For production, set these environment variables in your hosting platform:
 
+- `DATABASE_URL` on the backend, pointing to your managed Postgres database
 - `GOOGLE_CLIENT_ID` on the backend
-- `VITE_GOOGLE_CLIENT_ID` and `VITE_API_BASE` on the frontend
-- `FRONTEND_ORIGINS` on the backend, as a comma-separated list of your deployed frontend URLs
+- `VITE_GOOGLE_CLIENT_ID` on the frontend if you deploy the frontend separately
+- `VITE_API_BASE` on the frontend if you deploy the frontend separately
+- `FRONTEND_ORIGINS` on the backend, as a comma-separated list of your deployed frontend URLs, or `http://localhost:8000` for the single-container Docker setup above
 
 Example:
 
 ```bash
+DATABASE_URL=postgresql+psycopg://user:password@host:5432/diamind
 GOOGLE_CLIENT_ID=your-google-client-id
 FRONTEND_ORIGINS=https://your-app.com,https://www.your-app.com
 VITE_GOOGLE_CLIENT_ID=your-google-client-id

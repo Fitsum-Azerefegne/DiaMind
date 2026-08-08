@@ -13,12 +13,15 @@ import joblib
 import numpy as np
 import torch
 from datetime import datetime
+from pathlib import Path
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer
-from fastapi.responses import StreamingResponse
+from fastapi.responses import FileResponse, StreamingResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, EmailStr
 from sqlalchemy.orm import Session
+from sqlalchemy import inspect, text
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
@@ -54,23 +57,30 @@ FRONTEND_ORIGINS = [
     for origin in os.environ.get("FRONTEND_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173").split(",")
     if origin.strip()
 ]
+BASE_DIR = Path(__file__).resolve().parent.parent
+FRONTEND_DIST_DIR = BASE_DIR / "frontend" / "dist"
+FRONTEND_ASSETS_DIR = FRONTEND_DIST_DIR / "assets"
 
 # Create tables on startup if they don't already exist
 Base.metadata.create_all(bind=engine)
 
 
 def ensure_user_schema():
-    with engine.begin() as connection:
-        columns = [row[1] for row in connection.exec_driver_sql("PRAGMA table_info(users)")]
-        if "auth_provider" not in columns:
-            connection.exec_driver_sql(
-                "ALTER TABLE users ADD COLUMN auth_provider VARCHAR NOT NULL DEFAULT 'password'"
+    inspector = inspect(engine)
+    columns = [column["name"] for column in inspector.get_columns("users")]
+    if "auth_provider" not in columns:
+        with engine.begin() as connection:
+            connection.execute(
+                text("ALTER TABLE users ADD COLUMN auth_provider VARCHAR NOT NULL DEFAULT 'password'")
             )
 
 
 ensure_user_schema()
 
 app = FastAPI(title="DiaMind API")
+
+if FRONTEND_ASSETS_DIR.exists():
+    app.mount("/assets", StaticFiles(directory=FRONTEND_ASSETS_DIR), name="assets")
 
 app.add_middleware(
     CORSMiddleware,
@@ -525,3 +535,16 @@ def export_pdf(current_user: models.User = Depends(get_current_user), db: Sessio
         media_type="application/pdf",
         headers={"Content-Disposition": "attachment; filename=diamind_journal_export.pdf"},
     )
+
+
+@app.get("/{full_path:path}", include_in_schema=False)
+def serve_frontend(full_path: str):
+    api_prefixes = ("health", "facts", "signup", "login", "google-login", "me", "analyze", "trend", "account", "export", "openapi.json", "docs", "redoc")
+    if full_path.startswith(api_prefixes):
+        raise HTTPException(status_code=404)
+
+    index_file = FRONTEND_DIST_DIR / "index.html"
+    if index_file.exists():
+        return FileResponse(index_file)
+
+    raise HTTPException(status_code=404, detail="Frontend build not found.")
