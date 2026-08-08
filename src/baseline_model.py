@@ -1,14 +1,17 @@
 """
 Baseline model: TF-IDF + One-vs-Rest Logistic Regression, multi-label.
 
-This exists as a benchmark. If the fine-tuned transformer in train_transformer.py
-doesn't clearly beat this, that's a real finding worth reporting, not something to
-hide -- a large fraction of "AI" text classification tasks are actually won by
-simple linear baselines, and knowing that (and testing for it) is itself a signal
-of ML maturity.
+Trains on a combination of:
+  1. Real weakly-labeled forum posts (data/weakly_labeled_posts.csv)
+  2. Synthetic labeled data (data/sample_labeled_data.csv) as a supplement
+     for underrepresented labels
+
+The real data is prioritised; synthetic data fills gaps where real positive
+examples are too sparse to train on reliably.
 """
 import os
 import joblib
+import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -19,36 +22,85 @@ from sklearn.metrics import classification_report, f1_score
 LABELS = ["management_overwhelm", "guilt_shame", "fear_complications",
           "social_isolation", "hopelessness"]
 
-DATA_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "weakly_labeled_posts.csv")
+DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
 MODEL_DIR = os.path.join(os.path.dirname(__file__), "..", "models")
+
+WEAK_DATA = os.path.join(DATA_DIR, "weakly_labeled_posts.csv")
+SYNTH_DATA = os.path.join(DATA_DIR, "sample_labeled_data.csv")
+
+# Minimum real positive examples per label before we supplement with synthetic
+MIN_POSITIVES = 20
 
 
 def load_data():
-    df = pd.read_csv(DATA_PATH)
-    X = df["text"].values
-    y = df[LABELS].values
-    return X, y, df
+    # --- Real weakly-labeled forum posts ---
+    df_real = pd.read_csv(WEAK_DATA, encoding="utf-8")
+    # Drop posts flagged for manual review (humor + distress overlap — unreliable)
+    df_real = df_real[df_real["needs_manual_review"] == 0].copy()
+    df_real = df_real[["text"] + LABELS].dropna()
+    df_real[LABELS] = df_real[LABELS].astype(int)
+    df_real["source"] = "real"
+
+    print(f"Real data: {len(df_real)} posts (after dropping manual-review flagged)")
+    print("Positive counts per label (real data):")
+    for l in LABELS:
+        print(f"  {l}: {df_real[l].sum()}")
+
+    # --- Synthetic data: only use for labels that are too sparse in real data ---
+    frames = [df_real]
+    if os.path.exists(SYNTH_DATA):
+        df_synth = pd.read_csv(SYNTH_DATA, encoding="utf-8")
+        df_synth = df_synth[["text"] + LABELS].dropna()
+        df_synth[LABELS] = df_synth[LABELS].astype(int)
+        df_synth["source"] = "synthetic"
+
+        sparse_labels = [l for l in LABELS if df_real[l].sum() < MIN_POSITIVES]
+        if sparse_labels:
+            print(f"\nLabels below {MIN_POSITIVES} real positives, supplementing with synthetic: {sparse_labels}")
+            # Only add synthetic rows that have at least one sparse label positive
+            mask = df_synth[sparse_labels].any(axis=1)
+            df_supplement = df_synth[mask].copy()
+            frames.append(df_supplement)
+            print(f"Added {len(df_supplement)} synthetic rows as supplement")
+        else:
+            print("\nAll labels have sufficient real data — no synthetic supplement needed.")
+    else:
+        print("\nNo synthetic data found — run data/generate_synthetic_data.py to create it.")
+
+    df = pd.concat(frames, ignore_index=True)
+    print(f"\nFinal training set: {len(df)} rows")
+    print("Final positive counts per label:")
+    for l in LABELS:
+        print(f"  {l}: {df[l].sum()}")
+
+    import numpy as np
+    return np.array(df["text"].tolist()), df[LABELS].values.astype(int), df
 
 
 def train():
     X, y, df = load_data()
+
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, random_state=42
     )
 
     vectorizer = TfidfVectorizer(
-        max_features=5000, ngram_range=(1, 2), stop_words="english", min_df=2
+        max_features=8000, ngram_range=(1, 2), stop_words="english", min_df=2,
+        sublinear_tf=True,  # dampens very frequent terms
     )
     X_train_vec = vectorizer.fit_transform(X_train)
     X_test_vec = vectorizer.transform(X_test)
 
-    clf = OneVsRestClassifier(LogisticRegression(max_iter=1000, class_weight="balanced"))
+    # class_weight="balanced" handles the heavy class imbalance (most posts are "none")
+    clf = OneVsRestClassifier(
+        LogisticRegression(max_iter=1000, class_weight="balanced", C=1.0)
+    )
     clf.fit(X_train_vec, y_train)
 
     y_pred = clf.predict(X_test_vec)
 
-    print("=" * 60)
-    print("BASELINE MODEL: TF-IDF + Logistic Regression (One-vs-Rest)")
+    print("\n" + "=" * 60)
+    print("RESULTS: TF-IDF + Logistic Regression (One-vs-Rest)")
     print("=" * 60)
     print(classification_report(y_test, y_pred, target_names=LABELS, zero_division=0))
 
@@ -59,7 +111,7 @@ def train():
     os.makedirs(MODEL_DIR, exist_ok=True)
     joblib.dump(vectorizer, os.path.join(MODEL_DIR, "baseline_vectorizer.joblib"))
     joblib.dump(clf, os.path.join(MODEL_DIR, "baseline_classifier.joblib"))
-    print(f"\nSaved baseline model to {MODEL_DIR}/")
+    print(f"\nSaved model to {MODEL_DIR}/")
 
     return clf, vectorizer, macro_f1, micro_f1
 
@@ -77,13 +129,21 @@ if __name__ == "__main__":
     clf, vectorizer, macro_f1, micro_f1 = train()
 
     print("\n" + "=" * 60)
-    print("SAMPLE PREDICTIONS")
+    print("SAMPLE PREDICTIONS ON REAL T1D LANGUAGE")
     print("=" * 60)
     examples = [
-        "I can't keep up with all of this anymore, it's exhausting.",
+        "I'm so tired of counting every single carb, it never stops.",
+        "I saw a 280 on my CGM and just felt like a complete failure.",
+        "I lie awake terrified about what this is doing to my kidneys.",
+        "None of my friends get what a low feels like, I stopped explaining.",
+        "What's the point of trying so hard when nothing I do seems to matter.",
         "Changed my infusion site today, no issues.",
-        "Ha, my pancreas really quit on me again lol, whatever, fixed it.",
+        "I was so happy today, numbers were great and I felt really good!",
+        "Ha, my pancreas really quit on me again lol, whatever, adjusted and moved on.",
     ]
     for ex in examples:
+        result = predict(ex, clf, vectorizer)
+        top = max(result, key=result.get)
         print(f"\nText: {ex}")
-        print(f"Predicted: {predict(ex, clf, vectorizer)}")
+        print(f"Top signal: {top} ({result[top]:.2f})")
+        print(f"All: {result}")

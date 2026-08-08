@@ -18,3 +18,9 @@ __pycache__/
 *.pt
 *.pth
 datasets/
+
+# Database (contains user data)
+*.db
+
+# Temp / scratch files
+data/sample_check.txt

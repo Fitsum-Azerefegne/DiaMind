@@ -1,0 +1,401 @@
+id,text,management_overwhelm,guilt_shame,fear_complications,social_isolation,hopelessness,none
+0,I feel like I have a second full-time job just managing my blood sugar.,1,0,0,0,0,0
+1,Went for a run before breakfast and my numbers stayed nice and flat.,0,0,0,0,0,1
+2,"Tried a new low-carb recipe tonight, turned out pretty good.",0,0,0,0,0,1
+3,Honestly what's the point of trying so hard when my numbers are all over the place anyway.,0,0,0,0,1,0
+4,"I'm so tired of counting every single carb, every single day.",1,0,0,0,0,0
+5,Went for a run before breakfast and my numbers stayed nice and flat.,0,0,0,0,0,1
+6,"Juggling work, kids, and diabetes management is just too much some weeks.",1,0,0,0,0,0
+7,"Ha, my pancreas really said 'not today' but whatever, adjusted my dose and moved on.",0,0,0,0,0,1
+8,"Refilled my prescription at the pharmacy, all set for the month.",0,0,0,0,0,1
+9,I feel like I have a second full-time job just managing my blood sugar. Every high number feels like proof that I'm bad at this.,1,1,0,0,0,0
+10,Went for a run before breakfast and my numbers stayed nice and flat.,0,0,0,0,0,1
+11,"Every eye appointment I go into expecting bad news. My family thinks I'm just being dramatic when I need to stop and treat a low. I'm so tired of counting every single carb, every single day.",1,0,1,1,0,0
+12,"I don't bring it up anymore because people just don't get it. I'm so tired of counting every single carb, every single day.",1,0,0,1,0,0
+13,The neuropathy tingling in my feet freaks me out more than I let on. It feels like no matter what I do this disease is going to win eventually.,0,0,1,0,1,0
+14,Went for a run before breakfast and my numbers stayed nice and flat.,0,0,0,0,0,1
+15,"I'm so tired of counting every single carb, every single day. Every high number feels like proof that I'm bad at this.",1,1,0,0,0,0
+16,The neuropathy tingling in my feet freaks me out more than I let on.,0,0,1,0,0,0
+17,I ate the cake at the party and now I feel guilty about it all night.,0,1,0,0,0,0
+18,"My A1C went up and I feel so ashamed to tell my doctor. Juggling work, kids, and diabetes management is just too much some weeks.",1,1,0,0,0,0
+19,I'm scared of what fifty years of this disease will do to my heart.,0,0,1,0,0,0
+20,"Basal rates seem dialed in well this week, nothing to report.",0,0,0,0,0,1
+21,"I'm so tired of counting every single carb, every single day. I ate the cake at the party and now I feel guilty about it all night.",1,1,0,0,0,0
+22,Went for a run before breakfast and my numbers stayed nice and flat.,0,0,0,0,0,1
+23,"I've stopped logging my food, nothing I do seems to change anything. Every eye appointment I go into expecting bad news.",0,0,1,0,1,0
+24,My A1C went up and I feel so ashamed to tell my doctor. My family thinks I'm just being dramatic when I need to stop and treat a low.,0,1,0,1,0,0
+25,It feels like no matter what I do this disease is going to win eventually. Every eye appointment I go into expecting bad news.,0,0,1,0,1,0
+26,"I hid my pump from my coworkers today, I don't know why I feel embarrassed.",0,1,0,0,0,0
+27,"I'm so tired of counting every single carb, every single day.",1,0,0,0,0,0
+28,"My CGM sensor came in the mail, switching it out tomorrow morning.",0,0,0,0,0,1
+29,I don't bring it up anymore because people just don't get it. I forgot to bolus again and now I'm scrambling to fix it before work.,1,0,0,1,0,0
+30,Honestly what's the point of trying so hard when my numbers are all over the place anyway.,0,0,0,0,1,0
+31,I feel like I have a second full-time job just managing my blood sugar.,1,0,0,0,0,0
+32,I lie awake some nights terrified about what my kidneys will look like in ten years. Some days I just want to throw the whole pump away and not deal with any of it.,0,0,1,0,1,0
+33,"Changed my infusion site today, no issues so far.",0,0,0,0,0,1
+34,I ate the cake at the party and now I feel guilty about it all night. I lie awake some nights terrified about what my kidneys will look like in ten years. It feels like no matter what I do this disease is going to win eventually.,0,1,1,0,1,0
+35,"My CGM sensor came in the mail, switching it out tomorrow morning.",0,0,0,0,0,1
+36,Honestly what's the point of trying so hard when my numbers are all over the place anyway.,0,0,0,0,1,0
+37,"None of my friends really get what a low feels like, so I stopped explaining it.",0,0,0,1,0,0
+38,"Basal rates seem dialed in well this week, nothing to report.",0,0,0,0,0,1
+39,My A1C went up and I feel so ashamed to tell my doctor. I lie awake some nights terrified about what my kidneys will look like in ten years.,0,1,1,0,0,0
+40,"Told a joke about my sensor falling off in the shower again lol, third time this month.",0,0,0,0,0,1
+41,"Every high number feels like proof that I'm bad at this. I've stopped logging my food, nothing I do seems to change anything.",0,1,0,0,1,0
+42,"Ha, my pancreas really said 'not today' but whatever, adjusted my dose and moved on.",0,0,0,0,0,1
+43,Some days I just want to throw the whole pump away and not deal with any of it. I saw my grandmother lose her eyesight to this and I can't stop thinking it'll happen to me. Every high number feels like proof that I'm bad at this.,0,1,1,0,1,0
+44,Went for a run before breakfast and my numbers stayed nice and flat.,0,0,0,0,0,1
+45,"Changed my infusion site today, no issues so far.",0,0,0,0,0,1
+46,"I hid my pump from my coworkers today, I don't know why I feel embarrassed.",0,1,0,0,0,0
+47,"Tried a new low-carb recipe tonight, turned out pretty good.",0,0,0,0,0,1
+48,"I'm so tired of counting every single carb, every single day. I saw a 280 on my CGM and just felt like a complete failure.",1,1,0,0,0,0
+49,Went for a run before breakfast and my numbers stayed nice and flat.,0,0,0,0,0,1
+50,"Told a joke about my sensor falling off in the shower again lol, third time this month.",0,0,0,0,0,1
+51,"My CGM sensor came in the mail, switching it out tomorrow morning.",0,0,0,0,0,1
+52,"I've stopped logging my food, nothing I do seems to change anything. I don't bring it up anymore because people just don't get it.",0,0,0,1,1,0
+53,"Tried a new low-carb recipe tonight, turned out pretty good.",0,0,0,0,0,1
+54,Every eye appointment I go into expecting bad news.,0,0,1,0,0,0
+55,I feel like I have a second full-time job just managing my blood sugar.,1,0,0,0,0,0
+56,"I'm so tired of counting every single carb, every single day.",1,0,0,0,0,0
+57,I lie awake some nights terrified about what my kidneys will look like in ten years.,0,0,1,0,0,0
+58,Went for a run before breakfast and my numbers stayed nice and flat.,0,0,0,0,0,1
+59,Every high number feels like proof that I'm bad at this.,0,1,0,0,0,0
+60,"Told a joke about my sensor falling off in the shower again lol, third time this month.",0,0,0,0,0,1
+61,"Tried a new low-carb recipe tonight, turned out pretty good.",0,0,0,0,0,1
+62,Honestly what's the point of trying so hard when my numbers are all over the place anyway.,0,0,0,0,1,0
+63,"Changed my infusion site today, no issues so far.",0,0,0,0,0,1
+64,"I feel so alone managing this, like nobody else understands the mental load. Every high number feels like proof that I'm bad at this. I don't know why I bother with tight control anymore, it never seems to matter.",0,1,0,1,1,0
+65,"Changed my infusion site today, no issues so far.",0,0,0,0,0,1
+66,Sometimes it feels like I'm the only one dealing with this in my whole social circle. Every high number feels like proof that I'm bad at this. Every eye appointment I go into expecting bad news.,0,1,1,1,0,0
+67,"Changed my infusion site today, no issues so far.",0,0,0,0,0,1
+68,Honestly what's the point of trying so hard when my numbers are all over the place anyway.,0,0,0,0,1,0
+69,"I don't know why I bother with tight control anymore, it never seems to matter. Juggling work, kids, and diabetes management is just too much some weeks.",1,0,0,0,1,0
+70,"Tried a new low-carb recipe tonight, turned out pretty good.",0,0,0,0,0,1
+71,"I feel like I have a second full-time job just managing my blood sugar. I've stopped logging my food, nothing I do seems to change anything.",1,0,0,0,1,0
+72,Went for a run before breakfast and my numbers stayed nice and flat.,0,0,0,0,0,1
+73,"Juggling work, kids, and diabetes management is just too much some weeks.",1,0,0,0,0,0
+74,"Basal rates seem dialed in well this week, nothing to report.",0,0,0,0,0,1
+75,I ate the cake at the party and now I feel guilty about it all night. Every eye appointment I go into expecting bad news. Between the pump alarms and the finger pricks I can't keep up anymore.,1,1,1,0,0,0
+76,"I'm so tired of counting every single carb, every single day.",1,0,0,0,0,0
+77,Honestly what's the point of trying so hard when my numbers are all over the place anyway.,0,0,0,0,1,0
+78,Went for a run before breakfast and my numbers stayed nice and flat.,0,0,0,0,0,1
+79,I ate the cake at the party and now I feel guilty about it all night.,0,1,0,0,0,0
+80,I ate the cake at the party and now I feel guilty about it all night. The neuropathy tingling in my feet freaks me out more than I let on.,0,1,1,0,0,0
+81,Some days the sheer amount of decisions this disease demands wears me down completely. I'm scared of what fifty years of this disease will do to my heart.,1,0,1,0,0,0
+82,I saw a 280 on my CGM and just felt like a complete failure. Between the pump alarms and the finger pricks I can't keep up anymore. I'm scared of what fifty years of this disease will do to my heart.,1,1,1,0,0,0
+83,The neuropathy tingling in my feet freaks me out more than I let on.,0,0,1,0,0,0
+84,I'm scared of what fifty years of this disease will do to my heart.,0,0,1,0,0,0
+85,"I'm so tired of counting every single carb, every single day.",1,0,0,0,0,0
+86,I lie awake some nights terrified about what my kidneys will look like in ten years.,0,0,1,0,0,0
+87,"My CGM sensor came in the mail, switching it out tomorrow morning.",0,0,0,0,0,1
+88,The neuropathy tingling in my feet freaks me out more than I let on.,0,0,1,0,0,0
+89,"None of my friends really get what a low feels like, so I stopped explaining it. It feels like no matter what I do this disease is going to win eventually.",0,0,0,1,1,0
+90,"My CGM sensor came in the mail, switching it out tomorrow morning.",0,0,0,0,0,1
+91,I'm scared of what fifty years of this disease will do to my heart.,0,0,1,0,0,0
+92,"I feel so alone managing this, like nobody else understands the mental load.",0,0,0,1,0,0
+93,"Basal rates seem dialed in well this week, nothing to report.",0,0,0,0,0,1
+94,The neuropathy tingling in my feet freaks me out more than I let on. Between the pump alarms and the finger pricks I can't keep up anymore.,1,0,1,0,0,0
+95,"I don't know why I bother with tight control anymore, it never seems to matter.",0,0,0,0,1,0
+96,"I'm so tired of counting every single carb, every single day. I don't know why I bother with tight control anymore, it never seems to matter. My A1C went up and I feel so ashamed to tell my doctor.",1,1,0,0,1,0
+97,My A1C went up and I feel so ashamed to tell my doctor. My family thinks I'm just being dramatic when I need to stop and treat a low.,0,1,0,1,0,0
+98,I forgot to bolus again and now I'm scrambling to fix it before work.,1,0,0,0,0,0
+99,"Told a joke about my sensor falling off in the shower again lol, third time this month.",0,0,0,0,0,1
+100,Went for a run before breakfast and my numbers stayed nice and flat.,0,0,0,0,0,1
+101,Went for a run before breakfast and my numbers stayed nice and flat.,0,0,0,0,0,1
+102,I lie awake some nights terrified about what my kidneys will look like in ten years.,0,0,1,0,0,0
+103,"Sometimes it feels like I'm the only one dealing with this in my whole social circle. I'm scared of what fifty years of this disease will do to my heart. I don't know why I bother with tight control anymore, it never seems to matter.",0,0,1,1,1,0
+104,"Refilled my prescription at the pharmacy, all set for the month.",0,0,0,0,0,1
+105,"Refilled my prescription at the pharmacy, all set for the month.",0,0,0,0,0,1
+106,"Ha, my pancreas really said 'not today' but whatever, adjusted my dose and moved on.",0,0,0,0,0,1
+107,"Basal rates seem dialed in well this week, nothing to report.",0,0,0,0,0,1
+108,Honestly what's the point of trying so hard when my numbers are all over the place anyway.,0,0,0,0,1,0
+109,"I've stopped logging my food, nothing I do seems to change anything.",0,0,0,0,1,0
+110,"Ha, my pancreas really said 'not today' but whatever, adjusted my dose and moved on.",0,0,0,0,0,1
+111,Went for a run before breakfast and my numbers stayed nice and flat.,0,0,0,0,0,1
+112,I feel like I have a second full-time job just managing my blood sugar.,1,0,0,0,0,0
+113,Honestly what's the point of trying so hard when my numbers are all over the place anyway. Sometimes it feels like I'm the only one dealing with this in my whole social circle. I saw my grandmother lose her eyesight to this and I can't stop thinking it'll happen to me.,0,0,1,1,1,0
+114,"Refilled my prescription at the pharmacy, all set for the month.",0,0,0,0,0,1
+115,Every high number feels like proof that I'm bad at this.,0,1,0,0,0,0
+116,"I feel so alone managing this, like nobody else understands the mental load.",0,0,0,1,0,0
+117,Every eye appointment I go into expecting bad news.,0,0,1,0,0,0
+118,Some days the sheer amount of decisions this disease demands wears me down completely.,1,0,0,0,0,0
+119,"Ha, my pancreas really said 'not today' but whatever, adjusted my dose and moved on.",0,0,0,0,0,1
+120,"I don't know why I bother with tight control anymore, it never seems to matter. Every eye appointment I go into expecting bad news.",0,0,1,0,1,0
+121,"I don't know why I bother with tight control anymore, it never seems to matter.",0,0,0,0,1,0
+122,"I ate the cake at the party and now I feel guilty about it all night. Juggling work, kids, and diabetes management is just too much some weeks.",1,1,0,0,0,0
+123,Went for a run before breakfast and my numbers stayed nice and flat.,0,0,0,0,0,1
+124,My A1C went up and I feel so ashamed to tell my doctor.,0,1,0,0,0,0
+125,"Changed my infusion site today, no issues so far.",0,0,0,0,0,1
+126,"Told a joke about my sensor falling off in the shower again lol, third time this month.",0,0,0,0,0,1
+127,I forgot to bolus again and now I'm scrambling to fix it before work.,1,0,0,0,0,0
+128,"I've stopped logging my food, nothing I do seems to change anything.",0,0,0,0,1,0
+129,"I've stopped logging my food, nothing I do seems to change anything. I don't bring it up anymore because people just don't get it.",0,0,0,1,1,0
+130,"I'm so tired of counting every single carb, every single day.",1,0,0,0,0,0
+131,"I don't know why I bother with tight control anymore, it never seems to matter. I hid my pump from my coworkers today, I don't know why I feel embarrassed.",0,1,0,0,1,0
+132,I forgot to bolus again and now I'm scrambling to fix it before work.,1,0,0,0,0,0
+133,"Told a joke about my sensor falling off in the shower again lol, third time this month.",0,0,0,0,0,1
+134,It feels like no matter what I do this disease is going to win eventually.,0,0,0,0,1,0
+135,"Told a joke about my sensor falling off in the shower again lol, third time this month.",0,0,0,0,0,1
+136,"I don't know why I bother with tight control anymore, it never seems to matter.",0,0,0,0,1,0
+137,"I've stopped logging my food, nothing I do seems to change anything. I don't bring it up anymore because people just don't get it.",0,0,0,1,1,0
+138,Went for a run before breakfast and my numbers stayed nice and flat.,0,0,0,0,0,1
+139,The neuropathy tingling in my feet freaks me out more than I let on. My family thinks I'm just being dramatic when I need to stop and treat a low.,0,0,1,1,0,0
+140,"Refilled my prescription at the pharmacy, all set for the month.",0,0,0,0,0,1
+141,"Basal rates seem dialed in well this week, nothing to report.",0,0,0,0,0,1
+142,"Tried a new low-carb recipe tonight, turned out pretty good.",0,0,0,0,0,1
+143,Went for a run before breakfast and my numbers stayed nice and flat.,0,0,0,0,0,1
+144,My A1C went up and I feel so ashamed to tell my doctor.,0,1,0,0,0,0
+145,"Ha, my pancreas really said 'not today' but whatever, adjusted my dose and moved on.",0,0,0,0,0,1
+146,"Told a joke about my sensor falling off in the shower again lol, third time this month.",0,0,0,0,0,1
+147,Every high number feels like proof that I'm bad at this.,0,1,0,0,0,0
+148,Honestly what's the point of trying so hard when my numbers are all over the place anyway.,0,0,0,0,1,0
+149,"I don't know why I bother with tight control anymore, it never seems to matter. None of my friends really get what a low feels like, so I stopped explaining it.",0,0,0,1,1,0
+150,"Ha, my pancreas really said 'not today' but whatever, adjusted my dose and moved on.",0,0,0,0,0,1
+151,I don't bring it up anymore because people just don't get it. My A1C went up and I feel so ashamed to tell my doctor.,0,1,0,1,0,0
+152,I forgot to bolus again and now I'm scrambling to fix it before work.,1,0,0,0,0,0
+153,"Ha, my pancreas really said 'not today' but whatever, adjusted my dose and moved on.",0,0,0,0,0,1
+154,"I hid my pump from my coworkers today, I don't know why I feel embarrassed. Sometimes it feels like I'm the only one dealing with this in my whole social circle.",0,1,0,1,0,0
+155,Honestly what's the point of trying so hard when my numbers are all over the place anyway. I feel like I have a second full-time job just managing my blood sugar.,1,0,0,0,1,0
+156,"Told a joke about my sensor falling off in the shower again lol, third time this month.",0,0,0,0,0,1
+157,"Refilled my prescription at the pharmacy, all set for the month.",0,0,0,0,0,1
+158,Every high number feels like proof that I'm bad at this.,0,1,0,0,0,0
+159,"Ha, my pancreas really said 'not today' but whatever, adjusted my dose and moved on.",0,0,0,0,0,1
+160,"Ha, my pancreas really said 'not today' but whatever, adjusted my dose and moved on.",0,0,0,0,0,1
+161,"Tried a new low-carb recipe tonight, turned out pretty good.",0,0,0,0,0,1
+162,Honestly what's the point of trying so hard when my numbers are all over the place anyway.,0,0,0,0,1,0
+163,I saw a 280 on my CGM and just felt like a complete failure. Honestly what's the point of trying so hard when my numbers are all over the place anyway. I lie awake some nights terrified about what my kidneys will look like in ten years.,0,1,1,0,1,0
+164,"I've stopped logging my food, nothing I do seems to change anything. My A1C went up and I feel so ashamed to tell my doctor.",0,1,0,0,1,0
+165,"I've stopped logging my food, nothing I do seems to change anything.",0,0,0,0,1,0
+166,I saw my grandmother lose her eyesight to this and I can't stop thinking it'll happen to me.,0,0,1,0,0,0
+167,"Tried a new low-carb recipe tonight, turned out pretty good.",0,0,0,0,0,1
+168,I'm scared of what fifty years of this disease will do to my heart. I saw a 280 on my CGM and just felt like a complete failure.,0,1,1,0,0,0
+169,"None of my friends really get what a low feels like, so I stopped explaining it. I've stopped logging my food, nothing I do seems to change anything. I hid my pump from my coworkers today, I don't know why I feel embarrassed.",0,1,0,1,1,0
+170,"Refilled my prescription at the pharmacy, all set for the month.",0,0,0,0,0,1
+171,"It feels like no matter what I do this disease is going to win eventually. I'm so tired of counting every single carb, every single day.",1,0,0,0,1,0
+172,I lie awake some nights terrified about what my kidneys will look like in ten years.,0,0,1,0,0,0
+173,I lie awake some nights terrified about what my kidneys will look like in ten years.,0,0,1,0,0,0
+174,I don't bring it up anymore because people just don't get it. Some days the sheer amount of decisions this disease demands wears me down completely.,1,0,0,1,0,0
+175,Sometimes it feels like I'm the only one dealing with this in my whole social circle. I ate the cake at the party and now I feel guilty about it all night.,0,1,0,1,0,0
+176,Some days I just want to throw the whole pump away and not deal with any of it.,0,0,0,0,1,0
+177,Went for a run before breakfast and my numbers stayed nice and flat.,0,0,0,0,0,1
+178,I forgot to bolus again and now I'm scrambling to fix it before work. The neuropathy tingling in my feet freaks me out more than I let on.,1,0,1,0,0,0
+179,My family thinks I'm just being dramatic when I need to stop and treat a low.,0,0,0,1,0,0
+180,"Basal rates seem dialed in well this week, nothing to report.",0,0,0,0,0,1
+181,Went for a run before breakfast and my numbers stayed nice and flat.,0,0,0,0,0,1
+182,I saw my grandmother lose her eyesight to this and I can't stop thinking it'll happen to me.,0,0,1,0,0,0
+183,"Refilled my prescription at the pharmacy, all set for the month.",0,0,0,0,0,1
+184,"I've stopped logging my food, nothing I do seems to change anything.",0,0,0,0,1,0
+185,"Ha, my pancreas really said 'not today' but whatever, adjusted my dose and moved on.",0,0,0,0,0,1
+186,Every high number feels like proof that I'm bad at this.,0,1,0,0,0,0
+187,I don't bring it up anymore because people just don't get it.,0,0,0,1,0,0
+188,Every eye appointment I go into expecting bad news. Between the pump alarms and the finger pricks I can't keep up anymore.,1,0,1,0,0,0
+189,"Basal rates seem dialed in well this week, nothing to report.",0,0,0,0,0,1
+190,Some days I just want to throw the whole pump away and not deal with any of it.,0,0,0,0,1,0
+191,Some days I just want to throw the whole pump away and not deal with any of it.,0,0,0,0,1,0
+192,My family thinks I'm just being dramatic when I need to stop and treat a low.,0,0,0,1,0,0
+193,Went for a run before breakfast and my numbers stayed nice and flat.,0,0,0,0,0,1
+194,Went for a run before breakfast and my numbers stayed nice and flat.,0,0,0,0,0,1
+195,"My CGM sensor came in the mail, switching it out tomorrow morning.",0,0,0,0,0,1
+196,"Told a joke about my sensor falling off in the shower again lol, third time this month.",0,0,0,0,0,1
+197,"Refilled my prescription at the pharmacy, all set for the month.",0,0,0,0,0,1
+198,The neuropathy tingling in my feet freaks me out more than I let on. Some days the sheer amount of decisions this disease demands wears me down completely. I ate the cake at the party and now I feel guilty about it all night.,1,1,1,0,0,0
+199,"Changed my infusion site today, no issues so far.",0,0,0,0,0,1
+200,Every high number feels like proof that I'm bad at this.,0,1,0,0,0,0
+201,"Changed my infusion site today, no issues so far.",0,0,0,0,0,1
+202,I don't bring it up anymore because people just don't get it.,0,0,0,1,0,0
+203,I saw a 280 on my CGM and just felt like a complete failure.,0,1,0,0,0,0
+204,"Told a joke about my sensor falling off in the shower again lol, third time this month.",0,0,0,0,0,1
+205,"Tried a new low-carb recipe tonight, turned out pretty good.",0,0,0,0,0,1
+206,"Juggling work, kids, and diabetes management is just too much some weeks.",1,0,0,0,0,0
+207,Between the pump alarms and the finger pricks I can't keep up anymore.,1,0,0,0,0,0
+208,"Refilled my prescription at the pharmacy, all set for the month.",0,0,0,0,0,1
+209,Went for a run before breakfast and my numbers stayed nice and flat.,0,0,0,0,0,1
+210,"Ha, my pancreas really said 'not today' but whatever, adjusted my dose and moved on.",0,0,0,0,0,1
+211,"I've stopped logging my food, nothing I do seems to change anything.",0,0,0,0,1,0
+212,I don't bring it up anymore because people just don't get it. Some days I just want to throw the whole pump away and not deal with any of it.,0,0,0,1,1,0
+213,"Changed my infusion site today, no issues so far.",0,0,0,0,0,1
+214,Between the pump alarms and the finger pricks I can't keep up anymore.,1,0,0,0,0,0
+215,I lie awake some nights terrified about what my kidneys will look like in ten years.,0,0,1,0,0,0
+216,"My CGM sensor came in the mail, switching it out tomorrow morning.",0,0,0,0,0,1
+217,I saw a 280 on my CGM and just felt like a complete failure.,0,1,0,0,0,0
+218,"I don't know why I bother with tight control anymore, it never seems to matter.",0,0,0,0,1,0
+219,Went for a run before breakfast and my numbers stayed nice and flat.,0,0,0,0,0,1
+220,"Refilled my prescription at the pharmacy, all set for the month.",0,0,0,0,0,1
+221,"Some days the sheer amount of decisions this disease demands wears me down completely. I feel so alone managing this, like nobody else understands the mental load.",1,0,0,1,0,0
+222,"I've stopped logging my food, nothing I do seems to change anything.",0,0,0,0,1,0
+223,The neuropathy tingling in my feet freaks me out more than I let on.,0,0,1,0,0,0
+224,"My CGM sensor came in the mail, switching it out tomorrow morning.",0,0,0,0,0,1
+225,"I don't know why I bother with tight control anymore, it never seems to matter. I lie awake some nights terrified about what my kidneys will look like in ten years.",0,0,1,0,1,0
+226,My family thinks I'm just being dramatic when I need to stop and treat a low.,0,0,0,1,0,0
+227,I don't bring it up anymore because people just don't get it.,0,0,0,1,0,0
+228,"Changed my infusion site today, no issues so far.",0,0,0,0,0,1
+229,Honestly what's the point of trying so hard when my numbers are all over the place anyway. I lie awake some nights terrified about what my kidneys will look like in ten years.,0,0,1,0,1,0
+230,"I lie awake some nights terrified about what my kidneys will look like in ten years. Juggling work, kids, and diabetes management is just too much some weeks. Some days I just want to throw the whole pump away and not deal with any of it.",1,0,1,0,1,0
+231,My family thinks I'm just being dramatic when I need to stop and treat a low.,0,0,0,1,0,0
+232,"Ha, my pancreas really said 'not today' but whatever, adjusted my dose and moved on.",0,0,0,0,0,1
+233,"None of my friends really get what a low feels like, so I stopped explaining it.",0,0,0,1,0,0
+234,My family thinks I'm just being dramatic when I need to stop and treat a low.,0,0,0,1,0,0
+235,"Tried a new low-carb recipe tonight, turned out pretty good.",0,0,0,0,0,1
+236,Every eye appointment I go into expecting bad news. My family thinks I'm just being dramatic when I need to stop and treat a low.,0,0,1,1,0,0
+237,"I don't know why I bother with tight control anymore, it never seems to matter. I'm so tired of counting every single carb, every single day.",1,0,0,0,1,0
+238,"Tried a new low-carb recipe tonight, turned out pretty good.",0,0,0,0,0,1
+239,I forgot to bolus again and now I'm scrambling to fix it before work. Every eye appointment I go into expecting bad news. Sometimes it feels like I'm the only one dealing with this in my whole social circle.,1,0,1,1,0,0
+240,"I don't know why I bother with tight control anymore, it never seems to matter.",0,0,0,0,1,0
+241,Between the pump alarms and the finger pricks I can't keep up anymore.,1,0,0,0,0,0
+242,"My CGM sensor came in the mail, switching it out tomorrow morning.",0,0,0,0,0,1
+243,"It feels like no matter what I do this disease is going to win eventually. None of my friends really get what a low feels like, so I stopped explaining it. Between the pump alarms and the finger pricks I can't keep up anymore.",1,0,0,1,1,0
+244,"Changed my infusion site today, no issues so far.",0,0,0,0,0,1
+245,Between the pump alarms and the finger pricks I can't keep up anymore.,1,0,0,0,0,0
+246,"I feel like I have a second full-time job just managing my blood sugar. I feel so alone managing this, like nobody else understands the mental load. I don't know why I bother with tight control anymore, it never seems to matter.",1,0,0,1,1,0
+247,Every eye appointment I go into expecting bad news.,0,0,1,0,0,0
+248,"I hid my pump from my coworkers today, I don't know why I feel embarrassed. I don't bring it up anymore because people just don't get it.",0,1,0,1,0,0
+249,It feels like no matter what I do this disease is going to win eventually.,0,0,0,0,1,0
+250,I ate the cake at the party and now I feel guilty about it all night. I forgot to bolus again and now I'm scrambling to fix it before work.,1,1,0,0,0,0
+251,"Some days I just want to throw the whole pump away and not deal with any of it. I saw my grandmother lose her eyesight to this and I can't stop thinking it'll happen to me. Juggling work, kids, and diabetes management is just too much some weeks.",1,0,1,0,1,0
+252,My family thinks I'm just being dramatic when I need to stop and treat a low. Some days I just want to throw the whole pump away and not deal with any of it.,0,0,0,1,1,0
+253,The neuropathy tingling in my feet freaks me out more than I let on.,0,0,1,0,0,0
+254,"Every high number feels like proof that I'm bad at this. None of my friends really get what a low feels like, so I stopped explaining it. Some days the sheer amount of decisions this disease demands wears me down completely.",1,1,0,1,0,0
+255,"I don't know why I bother with tight control anymore, it never seems to matter. I feel so alone managing this, like nobody else understands the mental load.",0,0,0,1,1,0
+256,"Basal rates seem dialed in well this week, nothing to report.",0,0,0,0,0,1
+257,I forgot to bolus again and now I'm scrambling to fix it before work. Sometimes it feels like I'm the only one dealing with this in my whole social circle.,1,0,0,1,0,0
+258,"None of my friends really get what a low feels like, so I stopped explaining it. Every high number feels like proof that I'm bad at this.",0,1,0,1,0,0
+259,"Ha, my pancreas really said 'not today' but whatever, adjusted my dose and moved on.",0,0,0,0,0,1
+260,I'm scared of what fifty years of this disease will do to my heart.,0,0,1,0,0,0
+261,Every eye appointment I go into expecting bad news.,0,0,1,0,0,0
+262,Some days I just want to throw the whole pump away and not deal with any of it. Between the pump alarms and the finger pricks I can't keep up anymore.,1,0,0,0,1,0
+263,"I forgot to bolus again and now I'm scrambling to fix it before work. None of my friends really get what a low feels like, so I stopped explaining it.",1,0,0,1,0,0
+264,"I'm so tired of counting every single carb, every single day.",1,0,0,0,0,0
+265,"Changed my infusion site today, no issues so far.",0,0,0,0,0,1
+266,"Basal rates seem dialed in well this week, nothing to report.",0,0,0,0,0,1
+267,"I hid my pump from my coworkers today, I don't know why I feel embarrassed.",0,1,0,0,0,0
+268,My A1C went up and I feel so ashamed to tell my doctor.,0,1,0,0,0,0
+269,"Ha, my pancreas really said 'not today' but whatever, adjusted my dose and moved on.",0,0,0,0,0,1
+270,Every high number feels like proof that I'm bad at this.,0,1,0,0,0,0
+271,Every high number feels like proof that I'm bad at this. Some days I just want to throw the whole pump away and not deal with any of it.,0,1,0,0,1,0
+272,"Changed my infusion site today, no issues so far.",0,0,0,0,0,1
+273,The neuropathy tingling in my feet freaks me out more than I let on. Sometimes it feels like I'm the only one dealing with this in my whole social circle.,0,0,1,1,0,0
+274,I'm scared of what fifty years of this disease will do to my heart.,0,0,1,0,0,0
+275,"Ha, my pancreas really said 'not today' but whatever, adjusted my dose and moved on.",0,0,0,0,0,1
+276,My family thinks I'm just being dramatic when I need to stop and treat a low.,0,0,0,1,0,0
+277,"Ha, my pancreas really said 'not today' but whatever, adjusted my dose and moved on.",0,0,0,0,0,1
+278,"I forgot to bolus again and now I'm scrambling to fix it before work. I hid my pump from my coworkers today, I don't know why I feel embarrassed.",1,1,0,0,0,0
+279,I lie awake some nights terrified about what my kidneys will look like in ten years.,0,0,1,0,0,0
+280,"Sometimes it feels like I'm the only one dealing with this in my whole social circle. I lie awake some nights terrified about what my kidneys will look like in ten years. Juggling work, kids, and diabetes management is just too much some weeks.",1,0,1,1,0,0
+281,I ate the cake at the party and now I feel guilty about it all night. I'm scared of what fifty years of this disease will do to my heart.,0,1,1,0,0,0
+282,Some days I just want to throw the whole pump away and not deal with any of it.,0,0,0,0,1,0
+283,I saw a 280 on my CGM and just felt like a complete failure.,0,1,0,0,0,0
+284,I forgot to bolus again and now I'm scrambling to fix it before work. I lie awake some nights terrified about what my kidneys will look like in ten years.,1,0,1,0,0,0
+285,Every eye appointment I go into expecting bad news. Some days the sheer amount of decisions this disease demands wears me down completely.,1,0,1,0,0,0
+286,"Basal rates seem dialed in well this week, nothing to report.",0,0,0,0,0,1
+287,The neuropathy tingling in my feet freaks me out more than I let on.,0,0,1,0,0,0
+288,"Told a joke about my sensor falling off in the shower again lol, third time this month.",0,0,0,0,0,1
+289,Between the pump alarms and the finger pricks I can't keep up anymore. Honestly what's the point of trying so hard when my numbers are all over the place anyway. Every eye appointment I go into expecting bad news.,1,0,1,0,1,0
+290,"I lie awake some nights terrified about what my kidneys will look like in ten years. I don't know why I bother with tight control anymore, it never seems to matter. Some days the sheer amount of decisions this disease demands wears me down completely.",1,0,1,0,1,0
+291,I'm scared of what fifty years of this disease will do to my heart.,0,0,1,0,0,0
+292,I lie awake some nights terrified about what my kidneys will look like in ten years.,0,0,1,0,0,0
+293,"None of my friends really get what a low feels like, so I stopped explaining it.",0,0,0,1,0,0
+294,Some days I just want to throw the whole pump away and not deal with any of it.,0,0,0,0,1,0
+295,Every high number feels like proof that I'm bad at this. I feel like I have a second full-time job just managing my blood sugar.,1,1,0,0,0,0
+296,Between the pump alarms and the finger pricks I can't keep up anymore.,1,0,0,0,0,0
+297,"Changed my infusion site today, no issues so far.",0,0,0,0,0,1
+298,"Told a joke about my sensor falling off in the shower again lol, third time this month.",0,0,0,0,0,1
+299,Went for a run before breakfast and my numbers stayed nice and flat.,0,0,0,0,0,1
+300,Every high number feels like proof that I'm bad at this. My family thinks I'm just being dramatic when I need to stop and treat a low.,0,1,0,1,0,0
+301,Every high number feels like proof that I'm bad at this.,0,1,0,0,0,0
+302,Sometimes it feels like I'm the only one dealing with this in my whole social circle.,0,0,0,1,0,0
+303,I lie awake some nights terrified about what my kidneys will look like in ten years.,0,0,1,0,0,0
+304,Every high number feels like proof that I'm bad at this.,0,1,0,0,0,0
+305,I ate the cake at the party and now I feel guilty about it all night.,0,1,0,0,0,0
+306,"Basal rates seem dialed in well this week, nothing to report.",0,0,0,0,0,1
+307,I lie awake some nights terrified about what my kidneys will look like in ten years.,0,0,1,0,0,0
+308,I saw a 280 on my CGM and just felt like a complete failure.,0,1,0,0,0,0
+309,"I feel like I have a second full-time job just managing my blood sugar. I'm scared of what fifty years of this disease will do to my heart. I feel so alone managing this, like nobody else understands the mental load.",1,0,1,1,0,0
+310,"I've stopped logging my food, nothing I do seems to change anything. I hid my pump from my coworkers today, I don't know why I feel embarrassed.",0,1,0,0,1,0
+311,My A1C went up and I feel so ashamed to tell my doctor. It feels like no matter what I do this disease is going to win eventually.,0,1,0,0,1,0
+312,"My CGM sensor came in the mail, switching it out tomorrow morning.",0,0,0,0,0,1
+313,Between the pump alarms and the finger pricks I can't keep up anymore. Some days I just want to throw the whole pump away and not deal with any of it.,1,0,0,0,1,0
+314,I saw a 280 on my CGM and just felt like a complete failure.,0,1,0,0,0,0
+315,Between the pump alarms and the finger pricks I can't keep up anymore.,1,0,0,0,0,0
+316,Went for a run before breakfast and my numbers stayed nice and flat.,0,0,0,0,0,1
+317,Between the pump alarms and the finger pricks I can't keep up anymore.,1,0,0,0,0,0
+318,"My CGM sensor came in the mail, switching it out tomorrow morning.",0,0,0,0,0,1
+319,Honestly what's the point of trying so hard when my numbers are all over the place anyway. I forgot to bolus again and now I'm scrambling to fix it before work.,1,0,0,0,1,0
+320,"Juggling work, kids, and diabetes management is just too much some weeks. I don't know why I bother with tight control anymore, it never seems to matter.",1,0,0,0,1,0
+321,I feel like I have a second full-time job just managing my blood sugar. I saw a 280 on my CGM and just felt like a complete failure. I lie awake some nights terrified about what my kidneys will look like in ten years.,1,1,1,0,0,0
+322,I forgot to bolus again and now I'm scrambling to fix it before work.,1,0,0,0,0,0
+323,"Some days the sheer amount of decisions this disease demands wears me down completely. None of my friends really get what a low feels like, so I stopped explaining it.",1,0,0,1,0,0
+324,"Refilled my prescription at the pharmacy, all set for the month.",0,0,0,0,0,1
+325,It feels like no matter what I do this disease is going to win eventually.,0,0,0,0,1,0
+326,I don't bring it up anymore because people just don't get it. I'm scared of what fifty years of this disease will do to my heart.,0,0,1,1,0,0
+327,"Tried a new low-carb recipe tonight, turned out pretty good.",0,0,0,0,0,1
+328,"Every high number feels like proof that I'm bad at this. I don't know why I bother with tight control anymore, it never seems to matter.",0,1,0,0,1,0
+329,I don't bring it up anymore because people just don't get it.,0,0,0,1,0,0
+330,Some days the sheer amount of decisions this disease demands wears me down completely.,1,0,0,0,0,0
+331,I saw my grandmother lose her eyesight to this and I can't stop thinking it'll happen to me.,0,0,1,0,0,0
+332,"I don't know why I bother with tight control anymore, it never seems to matter. I'm so tired of counting every single carb, every single day. None of my friends really get what a low feels like, so I stopped explaining it.",1,0,0,1,1,0
+333,"It feels like no matter what I do this disease is going to win eventually. Juggling work, kids, and diabetes management is just too much some weeks.",1,0,0,0,1,0
+334,My family thinks I'm just being dramatic when I need to stop and treat a low.,0,0,0,1,0,0
+335,"My family thinks I'm just being dramatic when I need to stop and treat a low. Juggling work, kids, and diabetes management is just too much some weeks.",1,0,0,1,0,0
+336,It feels like no matter what I do this disease is going to win eventually.,0,0,0,0,1,0
+337,"Told a joke about my sensor falling off in the shower again lol, third time this month.",0,0,0,0,0,1
+338,"Tried a new low-carb recipe tonight, turned out pretty good.",0,0,0,0,0,1
+339,Some days I just want to throw the whole pump away and not deal with any of it.,0,0,0,0,1,0
+340,"Refilled my prescription at the pharmacy, all set for the month.",0,0,0,0,0,1
+341,Sometimes it feels like I'm the only one dealing with this in my whole social circle.,0,0,0,1,0,0
+342,"Some days I just want to throw the whole pump away and not deal with any of it. The neuropathy tingling in my feet freaks me out more than I let on. I'm so tired of counting every single carb, every single day.",1,0,1,0,1,0
+343,"Juggling work, kids, and diabetes management is just too much some weeks. I don't bring it up anymore because people just don't get it. The neuropathy tingling in my feet freaks me out more than I let on.",1,0,1,1,0,0
+344,It feels like no matter what I do this disease is going to win eventually. I feel like I have a second full-time job just managing my blood sugar.,1,0,0,0,1,0
+345,My family thinks I'm just being dramatic when I need to stop and treat a low.,0,0,0,1,0,0
+346,"Refilled my prescription at the pharmacy, all set for the month.",0,0,0,0,0,1
+347,Between the pump alarms and the finger pricks I can't keep up anymore. Honestly what's the point of trying so hard when my numbers are all over the place anyway.,1,0,0,0,1,0
+348,"Some days the sheer amount of decisions this disease demands wears me down completely. I don't know why I bother with tight control anymore, it never seems to matter.",1,0,0,0,1,0
+349,I don't bring it up anymore because people just don't get it.,0,0,0,1,0,0
+350,"Tried a new low-carb recipe tonight, turned out pretty good.",0,0,0,0,0,1
+351,"Tried a new low-carb recipe tonight, turned out pretty good.",0,0,0,0,0,1
+352,"Told a joke about my sensor falling off in the shower again lol, third time this month.",0,0,0,0,0,1
+353,I lie awake some nights terrified about what my kidneys will look like in ten years.,0,0,1,0,0,0
+354,"Changed my infusion site today, no issues so far.",0,0,0,0,0,1
+355,"Refilled my prescription at the pharmacy, all set for the month.",0,0,0,0,0,1
+356,I ate the cake at the party and now I feel guilty about it all night. Honestly what's the point of trying so hard when my numbers are all over the place anyway. I lie awake some nights terrified about what my kidneys will look like in ten years.,0,1,1,0,1,0
+357,"Ha, my pancreas really said 'not today' but whatever, adjusted my dose and moved on.",0,0,0,0,0,1
+358,"I hid my pump from my coworkers today, I don't know why I feel embarrassed.",0,1,0,0,0,0
+359,I lie awake some nights terrified about what my kidneys will look like in ten years.,0,0,1,0,0,0
+360,I forgot to bolus again and now I'm scrambling to fix it before work.,1,0,0,0,0,0
+361,"Tried a new low-carb recipe tonight, turned out pretty good.",0,0,0,0,0,1
+362,It feels like no matter what I do this disease is going to win eventually. I don't bring it up anymore because people just don't get it.,0,0,0,1,1,0
+363,"Ha, my pancreas really said 'not today' but whatever, adjusted my dose and moved on.",0,0,0,0,0,1
+364,"Basal rates seem dialed in well this week, nothing to report.",0,0,0,0,0,1
+365,"Told a joke about my sensor falling off in the shower again lol, third time this month.",0,0,0,0,0,1
+366,"I'm so tired of counting every single carb, every single day. Every eye appointment I go into expecting bad news.",1,0,1,0,0,0
+367,Sometimes it feels like I'm the only one dealing with this in my whole social circle.,0,0,0,1,0,0
+368,"Refilled my prescription at the pharmacy, all set for the month.",0,0,0,0,0,1
+369,I lie awake some nights terrified about what my kidneys will look like in ten years. My A1C went up and I feel so ashamed to tell my doctor.,0,1,1,0,0,0
+370,I ate the cake at the party and now I feel guilty about it all night.,0,1,0,0,0,0
+371,My A1C went up and I feel so ashamed to tell my doctor.,0,1,0,0,0,0
+372,"Refilled my prescription at the pharmacy, all set for the month.",0,0,0,0,0,1
+373,"My CGM sensor came in the mail, switching it out tomorrow morning.",0,0,0,0,0,1
+374,I feel like I have a second full-time job just managing my blood sugar. Every high number feels like proof that I'm bad at this.,1,1,0,0,0,0
+375,It feels like no matter what I do this disease is going to win eventually. Sometimes it feels like I'm the only one dealing with this in my whole social circle.,0,0,0,1,1,0
+376,Every eye appointment I go into expecting bad news. I saw a 280 on my CGM and just felt like a complete failure.,0,1,1,0,0,0
+377,I saw my grandmother lose her eyesight to this and I can't stop thinking it'll happen to me.,0,0,1,0,0,0
+378,I'm scared of what fifty years of this disease will do to my heart.,0,0,1,0,0,0
+379,"Told a joke about my sensor falling off in the shower again lol, third time this month.",0,0,0,0,0,1
+380,Some days the sheer amount of decisions this disease demands wears me down completely.,1,0,0,0,0,0
+381,"Juggling work, kids, and diabetes management is just too much some weeks. It feels like no matter what I do this disease is going to win eventually.",1,0,0,0,1,0
+382,Honestly what's the point of trying so hard when my numbers are all over the place anyway.,0,0,0,0,1,0
+383,"I've stopped logging my food, nothing I do seems to change anything.",0,0,0,0,1,0
+384,"Told a joke about my sensor falling off in the shower again lol, third time this month.",0,0,0,0,0,1
+385,I forgot to bolus again and now I'm scrambling to fix it before work.,1,0,0,0,0,0
+386,"Basal rates seem dialed in well this week, nothing to report.",0,0,0,0,0,1
+387,"Every high number feels like proof that I'm bad at this. Between the pump alarms and the finger pricks I can't keep up anymore. I don't know why I bother with tight control anymore, it never seems to matter.",1,1,0,0,1,0
+388,Every eye appointment I go into expecting bad news.,0,0,1,0,0,0
+389,I'm scared of what fifty years of this disease will do to my heart.,0,0,1,0,0,0
+390,"Basal rates seem dialed in well this week, nothing to report.",0,0,0,0,0,1
+391,"Tried a new low-carb recipe tonight, turned out pretty good.",0,0,0,0,0,1
+392,My family thinks I'm just being dramatic when I need to stop and treat a low.,0,0,0,1,0,0
+393,"My CGM sensor came in the mail, switching it out tomorrow morning.",0,0,0,0,0,1
+394,"My CGM sensor came in the mail, switching it out tomorrow morning.",0,0,0,0,0,1
+395,Sometimes it feels like I'm the only one dealing with this in my whole social circle. The neuropathy tingling in my feet freaks me out more than I let on.,0,0,1,1,0,0
+396,"Ha, my pancreas really said 'not today' but whatever, adjusted my dose and moved on.",0,0,0,0,0,1
+397,The neuropathy tingling in my feet freaks me out more than I let on.,0,0,1,0,0,0
+398,Honestly what's the point of trying so hard when my numbers are all over the place anyway.,0,0,0,0,1,0
+399,Sometimes it feels like I'm the only one dealing with this in my whole social circle.,0,0,0,1,0,0

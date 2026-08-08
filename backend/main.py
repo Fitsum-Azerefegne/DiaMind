@@ -24,6 +24,7 @@ from reportlab.lib.units import inch
 
 from backend.database import Base, engine, get_db
 from backend import models
+from backend.facts import FACTS
 from backend.auth import (
     hash_password, verify_password, create_access_token, decode_access_token
 )
@@ -121,6 +122,17 @@ def health():
     return {"status": "ok"}
 
 
+@app.get("/facts/today")
+def fact_of_the_day():
+    """Returns a fact of the day, cycling deterministically through FACTS by
+    day-of-year -- everyone sees the same fact on the same calendar day, and
+    it repeats predictably once the list is exhausted rather than erroring."""
+    day_of_year = datetime.utcnow().timetuple().tm_yday
+    index = (day_of_year - 1) % len(FACTS)
+    fact = FACTS[index]
+    return {"day_of_year": day_of_year, "category": fact["category"], "text": fact["text"]}
+
+
 @app.post("/signup", response_model=TokenResponse)
 def signup(payload: SignupRequest, db: Session = Depends(get_db)):
     existing = db.query(models.User).filter(models.User.email == payload.email).first()
@@ -167,14 +179,53 @@ def analyze(
     top_label = max(scores, key=scores.get)
     top_score = scores[top_label]
 
+    POSITIVE_WORDS = ["happy", "great", "good", "well", "proud", "amazing", "wonderful",
+                       "excited", "grateful", "thankful", "better", "strong", "confident",
+                       "joy", "love", "calm", "peaceful", "hopeful", "fine", "okay", "ok"]
+    text_lower = entry.text.lower()
+    sounds_positive = any(w in text_lower for w in POSITIVE_WORDS)
+
     if top_score < 0.4:
-        context_message = "This entry doesn't show strong distress-language patterns."
+        if sounds_positive:
+            context_message = (
+                "That's genuinely great to hear 💛 Days like this matter — hold onto that feeling. "
+                "Living with T1D takes real strength, and it sounds like you're doing well today."
+            )
+        else:
+            context_message = (
+                "No strong distress signals today. How are you really feeling? "
+                "You can always write more — this is your safe space."
+            )
         stored_top_label = None
     else:
-        context_message = (
-            f"This entry shows language patterns associated with {LABEL_DESCRIPTIONS[top_label]}. "
-            "This reflects language patterns, not a diagnosis -- if this feels "
-            "persistent, consider mentioning it to your care team."
+        WARM_MESSAGES = {
+            "management_overwhelm": (
+                "It sounds like the daily grind of managing T1D is weighing on you right now — "
+                "and that's completely valid. Counting carbs, adjusting doses, watching numbers... "
+                "it never stops. You're not failing; you're carrying a lot. 💙"
+            ),
+            "guilt_shame": (
+                "Please be gentle with yourself. Numbers don't define you, and a bad reading "
+                "doesn't mean you did something wrong. T1D is unpredictable — you're doing your best. 💙"
+            ),
+            "fear_complications": (
+                "Worrying about the future with T1D is real and it makes sense. "
+                "You're not alone in that fear. Taking it one day at a time is enough. 💙"
+            ),
+            "social_isolation": (
+                "Feeling like no one around you truly gets it is one of the hardest parts of T1D. "
+                "But you're not alone — there's a whole community of people who understand exactly what you're going through. 💙"
+            ),
+            "hopelessness": (
+                "It's okay to have days where it all feels pointless. That feeling is valid. "
+                "But you showed up today and wrote this — that matters more than you know. "
+                "If this feeling sticks around, please reach out to someone on your care team. 💙"
+            ),
+        }
+        context_message = WARM_MESSAGES.get(
+            top_label,
+            f"This entry shows patterns around {LABEL_DESCRIPTIONS[top_label]}. "
+            "If this feels persistent, consider mentioning it to your care team. 💙"
         )
         stored_top_label = top_label
 
