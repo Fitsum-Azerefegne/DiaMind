@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { api } from "../api";
 import { useAuth } from "../context/AuthContext";
 
@@ -12,11 +12,68 @@ const LEGEND = [
 
 export default function AuthView() {
   const { loginWithToken } = useAuth();
+  const googleButtonRef = useRef(null);
   const [isSignup, setIsSignup] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+
+  useEffect(() => {
+    if (!googleClientId || !googleButtonRef.current) {
+      return;
+    }
+
+    const renderGoogleButton = () => {
+      if (!window.google?.accounts?.id || !googleButtonRef.current) {
+        return;
+      }
+
+      googleButtonRef.current.innerHTML = "";
+      window.google.accounts.id.initialize({
+        client_id: googleClientId,
+        callback: async (response) => {
+          setError("");
+          setLoading(true);
+          try {
+            const resp = await api.googleLogin(response.credential);
+            await loginWithToken(resp.access_token);
+          } catch (err) {
+            setError(err.message);
+          } finally {
+            setLoading(false);
+          }
+        },
+      });
+      window.google.accounts.id.renderButton(googleButtonRef.current, {
+        theme: "outline",
+        size: "large",
+        shape: "pill",
+        width: 380,
+        text: isSignup ? "signup_with" : "signin_with",
+      });
+    };
+
+    if (window.google?.accounts?.id) {
+      renderGoogleButton();
+      return;
+    }
+
+    const scriptId = "google-identity-services";
+    let script = document.getElementById(scriptId);
+    if (!script) {
+      script = document.createElement("script");
+      script.id = scriptId;
+      script.src = "https://accounts.google.com/gsi/client";
+      script.async = true;
+      script.defer = true;
+      script.onload = renderGoogleButton;
+      document.head.appendChild(script);
+    } else {
+      script.addEventListener("load", renderGoogleButton, { once: true });
+    }
+  }, [googleClientId, isSignup, loginWithToken]);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -117,6 +174,17 @@ export default function AuthView() {
           <p className="auth-panel-copy">
             {isSignup ? "Join DiaMind and start turning your entries into clear emotional patterns." : "Pick up where you left off and keep tracking what matters."}
           </p>
+
+          <div className="google-auth-wrap">
+            <div ref={googleButtonRef} className="google-button-slot" />
+            {!googleClientId && (
+              <p className="auth-helper-text">
+                Add VITE_GOOGLE_CLIENT_ID on the frontend and GOOGLE_CLIENT_ID on the backend to enable Google sign-in.
+              </p>
+            )}
+          </div>
+
+          <div className="auth-divider"><span>or</span></div>
 
           {error && <div className="error-msg">{error}</div>}
           <form onSubmit={handleSubmit}>

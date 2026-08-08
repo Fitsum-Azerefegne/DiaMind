@@ -1,4 +1,4 @@
-const API_BASE = "http://127.0.0.1:8000";
+const API_BASE = import.meta.env.VITE_API_BASE || "http://127.0.0.1:8000";
 
 async function request(path, options = {}) {
   const res = await fetch(`${API_BASE}${path}`, options);
@@ -32,6 +32,13 @@ export const api = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
+    }),
+
+  googleLogin: (credential) =>
+    request("/google-login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ credential }),
     }),
 
   me: (token) => request("/me", { headers: authHeaders(token) }),

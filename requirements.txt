@@ -10,3 +10,4 @@ uvicorn>=0.24.0
 pydantic>=2.4.0
 praw>=7.7.1
 matplotlib>=3.8.0
+google-auth>=2.0.0

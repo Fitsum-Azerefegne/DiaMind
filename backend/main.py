@@ -8,6 +8,7 @@ Run with (from the diamind/ root folder):
 import os
 import io
 import csv
+import secrets
 import joblib
 import numpy as np
 import torch
@@ -24,6 +25,8 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib import colors
 from reportlab.lib.units import inch
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
+from google.auth.transport import requests as google_requests
+from google.oauth2 import id_token as google_id_token
 
 from backend.database import Base, engine, get_db
 from backend import models
@@ -45,15 +48,33 @@ LABEL_DESCRIPTIONS = {
 
 MODEL_DIR = os.path.join(os.path.dirname(__file__), "..", "models")
 TRANSFORMER_MODEL_DIR = os.path.join(MODEL_DIR, "distilbert-diamind")
+GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID")
+FRONTEND_ORIGINS = [
+    origin.strip()
+    for origin in os.environ.get("FRONTEND_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173").split(",")
+    if origin.strip()
+]
 
 # Create tables on startup if they don't already exist
 Base.metadata.create_all(bind=engine)
+
+
+def ensure_user_schema():
+    with engine.begin() as connection:
+        columns = [row[1] for row in connection.exec_driver_sql("PRAGMA table_info(users)")]
+        if "auth_provider" not in columns:
+            connection.exec_driver_sql(
+                "ALTER TABLE users ADD COLUMN auth_provider VARCHAR NOT NULL DEFAULT 'password'"
+            )
+
+
+ensure_user_schema()
 
 app = FastAPI(title="DiaMind API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # tighten this to your real frontend domain before deploying
+    allow_origins=FRONTEND_ORIGINS,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -141,6 +162,10 @@ class LoginRequest(BaseModel):
     password: str
 
 
+class GoogleLoginRequest(BaseModel):
+    credential: str
+
+
 class JournalEntryRequest(BaseModel):
     text: str
 
@@ -185,7 +210,7 @@ def signup(payload: SignupRequest, db: Session = Depends(get_db)):
     if len(payload.password) < 8:
         raise HTTPException(status_code=400, detail="Password must be at least 8 characters.")
 
-    user = models.User(email=payload.email, hashed_password=hash_password(payload.password))
+    user = models.User(email=payload.email, hashed_password=hash_password(payload.password), auth_provider="password")
     db.add(user)
     db.commit()
     db.refresh(user)
@@ -197,8 +222,47 @@ def signup(payload: SignupRequest, db: Session = Depends(get_db)):
 @app.post("/login", response_model=TokenResponse)
 def login(payload: LoginRequest, db: Session = Depends(get_db)):
     user = db.query(models.User).filter(models.User.email == payload.email).first()
-    if not user or not verify_password(payload.password, user.hashed_password):
+    if not user:
         raise HTTPException(status_code=401, detail="Incorrect email or password.")
+    if user.auth_provider == "google":
+        raise HTTPException(status_code=401, detail="This account uses Google sign-in. Continue with Google.")
+    if not verify_password(payload.password, user.hashed_password):
+        raise HTTPException(status_code=401, detail="Incorrect email or password.")
+
+    token = create_access_token({"sub": user.email})
+    return TokenResponse(access_token=token)
+
+
+@app.post("/google-login", response_model=TokenResponse)
+def google_login(payload: GoogleLoginRequest, db: Session = Depends(get_db)):
+    if not GOOGLE_CLIENT_ID:
+        raise HTTPException(status_code=500, detail="Google sign-in is not configured on the server.")
+
+    try:
+        info = google_id_token.verify_oauth2_token(
+            payload.credential,
+            google_requests.Request(),
+            GOOGLE_CLIENT_ID,
+        )
+    except Exception:
+        raise HTTPException(status_code=401, detail="Google sign-in could not be verified.")
+
+    if not info.get("email") or not info.get("email_verified"):
+        raise HTTPException(status_code=401, detail="Google account email is not verified.")
+
+    email = info["email"].lower()
+    user = db.query(models.User).filter(models.User.email == email).first()
+    if user is None:
+        user = models.User(
+            email=email,
+            hashed_password=hash_password(secrets.token_urlsafe(32)),
+            auth_provider="google",
+        )
+        db.add(user)
+    else:
+        user.auth_provider = "google"
+    db.commit()
+    db.refresh(user)
 
     token = create_access_token({"sub": user.email})
     return TokenResponse(access_token=token)
@@ -206,7 +270,7 @@ def login(payload: LoginRequest, db: Session = Depends(get_db)):
 
 @app.get("/me")
 def me(current_user: models.User = Depends(get_current_user)):
-    return {"email": current_user.email}
+    return {"email": current_user.email, "auth_provider": current_user.auth_provider}
 
 
 @app.post("/analyze")
@@ -332,11 +396,15 @@ def change_password(
     current_user: models.User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
-    if not verify_password(payload.current_password, current_user.hashed_password):
+    if current_user.auth_provider == "google":
+        if payload.current_password:
+            raise HTTPException(status_code=400, detail="Google sign-in accounts do not have a current password. Leave it blank to set one.")
+    elif not verify_password(payload.current_password, current_user.hashed_password):
         raise HTTPException(status_code=401, detail="Current password is incorrect.")
     if len(payload.new_password) < 8:
         raise HTTPException(status_code=400, detail="New password must be at least 8 characters.")
 
+    current_user.auth_provider = "password"
     current_user.hashed_password = hash_password(payload.new_password)
     db.commit()
     return {"status": "password updated"}
@@ -348,7 +416,10 @@ def delete_account(
     current_user: models.User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
-    if not verify_password(payload.password, current_user.hashed_password):
+    if current_user.auth_provider == "google":
+        if payload.password:
+            raise HTTPException(status_code=400, detail="Google sign-in accounts do not use a password here. Leave it blank to confirm deletion.")
+    elif not verify_password(payload.password, current_user.hashed_password):
         raise HTTPException(status_code=401, detail="Password is incorrect.")
 
     # Cascade delete is configured on the relationship, so entries go too.

@@ -3,7 +3,8 @@ import { api } from "../api";
 import { useAuth } from "../context/AuthContext";
 
 export default function SettingsView({ setView }) {
-  const { token, logout } = useAuth();
+  const { token, logout, user } = useAuth();
+  const isGoogleAccount = user?.auth_provider === "google";
 
   const [currentPw, setCurrentPw] = useState("");
   const [newPw, setNewPw] = useState("");
@@ -18,7 +19,8 @@ export default function SettingsView({ setView }) {
   async function handleChangePassword() {
     setPwError("");
     setPwSuccess("");
-    if (!currentPw || !newPw) { setPwError("Fill in both fields."); return; }
+    if (!newPw) { setPwError("Fill in the new password field."); return; }
+    if (!isGoogleAccount && !currentPw) { setPwError("Fill in both fields."); return; }
     if (newPw.length < 8) { setPwError("New password must be at least 8 characters."); return; }
 
     setPwLoading(true);
@@ -40,7 +42,7 @@ export default function SettingsView({ setView }) {
       return;
     }
     setDeleteError("");
-    if (!deletePassword) { setDeleteError("Enter your password to confirm."); return; }
+    if (!isGoogleAccount && !deletePassword) { setDeleteError("Enter your password to confirm."); return; }
     try {
       await api.deleteAccount(token, deletePassword);
       logout();
@@ -59,14 +61,17 @@ export default function SettingsView({ setView }) {
 
       <div className="card">
         <h2>Change password</h2>
+        {isGoogleAccount && <p className="settings-copy">This account was created with Google sign-in. Leave the current password blank to set a local password.</p>}
         {pwError && <div className="error-msg">{pwError}</div>}
         {pwSuccess && <div className="success-msg">{pwSuccess}</div>}
+        {!isGoogleAccount && (
+          <div className="field">
+            <label>Current password</label>
+            <input type="password" value={currentPw} onChange={(e) => setCurrentPw(e.target.value)} autoComplete="current-password" />
+          </div>
+        )}
         <div className="field">
-          <label>Current password</label>
-          <input type="password" value={currentPw} onChange={(e) => setCurrentPw(e.target.value)} autoComplete="current-password" />
-        </div>
-        <div className="field">
-          <label>New password</label>
+          <label>{isGoogleAccount ? "Set a password" : "New password"}</label>
           <input type="password" value={newPw} onChange={(e) => setNewPw(e.target.value)} placeholder="At least 8 characters" autoComplete="new-password" />
         </div>
         <div className="actions">
@@ -88,8 +93,9 @@ export default function SettingsView({ setView }) {
       <div className="card danger-card">
         <h2 className="danger-title">Delete account</h2>
         <p className="settings-copy">This permanently deletes your account and every journal entry. There's no undo.</p>
+        {isGoogleAccount && <p className="settings-copy">Because this account uses Google sign-in, you can confirm deletion without entering a password.</p>}
         {deleteError && <div className="error-msg">{deleteError}</div>}
-        {deletePending && (
+        {deletePending && !isGoogleAccount && (
           <div className="field">
             <label>Enter your password to confirm</label>
             <input type="password" value={deletePassword} onChange={(e) => setDeletePassword(e.target.value)} />
