@@ -177,11 +177,6 @@ export default function AuthView() {
 
           <div className="google-auth-wrap">
             <div ref={googleButtonRef} className="google-button-slot" />
-            {!googleClientId && (
-              <p className="auth-helper-text">
-                Add VITE_GOOGLE_CLIENT_ID on the frontend and GOOGLE_CLIENT_ID on the backend to enable Google sign-in.
-              </p>
-            )}
           </div>
 
           <div className="auth-divider"><span>or</span></div>
